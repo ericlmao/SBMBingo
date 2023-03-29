@@ -17,6 +17,10 @@ public interface BingoTeam extends Keyd<BingoColor> {
         return getMembers().stream().filter(uuid -> Bukkit.getPlayer(uuid) != null).map(Bukkit::getPlayer).collect(Collectors.toList());
     }
 
+    void addMember(UUID uuid);
+
+    void removeMember(UUID uuid);
+
     BingoColor getBingoColor();
 
 }

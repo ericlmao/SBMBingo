@@ -16,6 +16,9 @@ import java.util.List;
 @Getter
 public enum Locale {
 
+    NOT_ON_TEAM("not-on-team", List.of(
+            "&cYou are not on a team!")
+    ),
     ;
     private final String id;
     private final List<String> defaultMessage;

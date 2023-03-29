@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class BingoGoalManagerProvider implements BingoGoalManager {
@@ -64,5 +65,7 @@ public class BingoGoalManagerProvider implements BingoGoalManager {
 
             plugin.getLogger().info("Loaded goal " + goal.getKey() + "");
         }
+
+        Collections.shuffle(this.goals);
     }
 }

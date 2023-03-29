@@ -107,6 +107,6 @@ public class BingoTeamImpl implements BingoTeam {
 
     @Override
     public void setKey(@NotNull BingoColor bingoColor) {
-
+        throw new UnsupportedOperationException("Cannot change the key of a team");
     }
 }

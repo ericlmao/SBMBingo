@@ -2,6 +2,7 @@ package games.negative.bingo.goals;
 
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
+import games.negative.bingo.api.model.team.BingoTeam;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.entity.EntityPickupItemEvent;
@@ -22,17 +23,17 @@ public class CollectItemGoal extends BingoGoal {
     }
 
     @Override
-    public void onCraft(CraftItemEvent event) {
-        super.onCraft(event);
+    public void onPlayerPickup(BingoTeam team, EntityPickupItemEvent event) {
+        super.onPlayerPickup(team, event);
     }
 
     @Override
-    public void onInventoryClick(InventoryCloseEvent event) {
-        super.onInventoryClick(event);
+    public void onCraft(BingoTeam team, CraftItemEvent event) {
+        super.onCraft(team, event);
     }
 
     @Override
-    public void onPlayerPickup(EntityPickupItemEvent event) {
-        super.onPlayerPickup(event);
+    public void onInventoryClick(BingoTeam team, InventoryCloseEvent event) {
+        super.onInventoryClick(team, event);
     }
 }

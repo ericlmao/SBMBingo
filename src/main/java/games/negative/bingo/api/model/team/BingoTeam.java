@@ -1,4 +1,4 @@
-package games.negative.bingo.api.model;
+package games.negative.bingo.api.model.team;
 
 import games.negative.framework.key.Keyd;
 import org.bukkit.Bukkit;

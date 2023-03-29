@@ -1,4 +1,4 @@
-package games.negative.bingo.api.model;
+package games.negative.bingo.api.model.team;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

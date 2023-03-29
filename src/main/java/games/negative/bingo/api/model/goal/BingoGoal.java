@@ -2,6 +2,7 @@ package games.negative.bingo.api.model.goal;
 
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.framework.key.Keyd;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
@@ -16,17 +17,24 @@ public abstract class BingoGoal implements Keyd<String> {
     private final String key;
     private final BingoGoalType type;
     private final int amount;
+    private final String display;
+    private final Material displayMaterial;
 
     public BingoGoal(ConfigurationSection section) {
         this.key = section.getName();
         this.type = BingoGoalType.valueOf(section.getString("goal-type"));
         this.amount = section.getInt("goal-amount");
+
+        this.display = section.getString("name");
+        this.displayMaterial = Material.valueOf(section.getString("material"));
     }
 
-    public BingoGoal(String key, BingoGoalType type, int amount) {
+    public BingoGoal(String key, BingoGoalType type, int amount, String displayName, Material displayMaterial) {
         this.key = key;
         this.type = type;
         this.amount = amount;
+        this.display = displayName;
+        this.displayMaterial = displayMaterial;
     }
 
     @NotNull
@@ -41,6 +49,14 @@ public abstract class BingoGoal implements Keyd<String> {
 
     public int getAmount() {
         return amount;
+    }
+
+    public Material getDisplayMaterial() {
+        return displayMaterial;
+    }
+
+    public String getDisplay() {
+        return display;
     }
 
     @Override

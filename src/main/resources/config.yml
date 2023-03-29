@@ -15,3 +15,20 @@ teams:
   GOLD: true
   GRAY: true
   LIGHT_PURPLE: true
+
+goals:
+  COLLECT_DIAMOND: # ID of the Goal
+    name: "&fCollect a &bDiamond" # Display Name of the Goal (in the GUI)
+    material: DIAMOND_ORE # Material of the Goal (in the GUI)
+
+    goal-type: "COLLECT"
+    goal-material: DIAMOND
+    goal-amount: 1
+
+  COLLECT_COAL:
+    name: "&fCollect 32 &8Coal"
+    material: COAL_ORE
+
+    goal-type: "COLLECT"
+    goal-material: COAL
+    goal-amount: 32

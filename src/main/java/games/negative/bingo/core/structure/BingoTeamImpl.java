@@ -1,10 +1,15 @@
 package games.negative.bingo.core.structure;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoColor;
 import games.negative.bingo.api.model.team.BingoTeam;
+import org.bukkit.Bukkit;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -17,11 +22,29 @@ public class BingoTeamImpl implements BingoTeam {
     private final BingoColor color;
     private final Map<BingoGoal, Integer> progress;
     private final List<UUID> members;
+    private final Team team;
 
     public BingoTeamImpl(BingoColor color) {
         this.color = color;
         this.members = Lists.newArrayList();
         this.progress = Maps.newHashMap();
+
+        ScoreboardManager manager = Bukkit.getScoreboardManager();
+        Preconditions.checkNotNull(manager, "Scoreboard manager is null");
+
+        Scoreboard board = manager.getMainScoreboard();
+
+        Team temp = board.getTeam("bingo-" + color.toString());
+        if (temp == null)
+            temp = board.registerNewTeam("bingo-" + color);
+
+        this.team = temp;
+        team.setColor(color.getColor());
+    }
+
+    @Override
+    public Team getMinecraftTeam() {
+        return team;
     }
 
     @Override

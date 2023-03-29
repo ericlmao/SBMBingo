@@ -4,6 +4,7 @@ import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.framework.key.Keyd;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Team;
 
 import java.util.Collection;
 import java.util.Map;
@@ -11,6 +12,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public interface BingoTeam extends Keyd<BingoColor> {
+
+    Team getMinecraftTeam();
 
     Collection<UUID> getMembers();
 

@@ -6,6 +6,7 @@ import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
 import games.negative.bingo.goals.CollectItemGoal;
+import games.negative.bingo.goals.KillGoal;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -53,9 +54,8 @@ public class BingoGoalManagerProvider implements BingoGoalManager {
             BingoGoalType type = BingoGoalType.valueOf(section.getString("goal-type"));
             BingoGoal goal;
             switch (type) {
-                case COLLECT -> {
-                    goal = new CollectItemGoal(section);
-                }
+                case COLLECT -> goal = new CollectItemGoal(section);
+                case KILL -> goal = new KillGoal(section);
 
                 default -> throw new IllegalStateException("Unexpected value: " + type);
             }

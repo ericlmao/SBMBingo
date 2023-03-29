@@ -36,30 +36,7 @@ public class CollectItemGoal extends BingoGoal {
     @Override
     public void onPlayerPickup(BingoTeam team, EntityPickupItemEvent event) {
         ItemStack item = event.getItem().getItemStack();
-        Material type = item.getType();
-        if (type != material)
-            return;
-
-        ItemMeta meta = item.getItemMeta();
-        if (meta == null)
-            return;
-
-        PersistentDataContainer container = meta.getPersistentDataContainer();
-        if (container.has(counted, PersistentDataType.BYTE))
-            return;
-
-        int amount = item.getAmount();
-        team.addProgress(this, amount);
-
-        container.set(counted, PersistentDataType.BYTE, (byte) 1);
-
-        int progress = team.getProgress(this);
-        if (progress < getAmount())
-            return;
-
-        // Team has completed the goal, do something
-        BingoTeamCompleteGoalEvent complete = new BingoTeamCompleteGoalEvent(team, this);
-        Events.call(complete);
+        attemptComplete(item, team);
     }
 
     @Override
@@ -72,6 +49,10 @@ public class CollectItemGoal extends BingoGoal {
         if (item == null)
             return;
 
+        attemptComplete(item, team);
+    }
+
+    public void attemptComplete(ItemStack item, BingoTeam team) {
         Material type = item.getType();
         if (type != material)
             return;

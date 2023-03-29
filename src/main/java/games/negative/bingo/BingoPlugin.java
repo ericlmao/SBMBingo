@@ -1,8 +1,12 @@
 package games.negative.bingo;
 
 import games.negative.bingo.api.BingoAPI;
+import games.negative.bingo.api.BingoGoalManager;
+import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.bingo.commands.main.CommandBingo;
 import games.negative.bingo.core.provider.BingoAPIProvider;
+import games.negative.bingo.listener.BingoTeamListener;
 import games.negative.framework.BasePlugin;
 import org.bukkit.scoreboard.Team;
 
@@ -21,6 +25,17 @@ public class BingoPlugin extends BasePlugin {
         reloadConfig();
 
         this.api = new BingoAPIProvider(this, getConfig());
+
+        BingoTeamManager teamManager = api.getTeamManager();
+        BingoGoalManager goalManager = api.getGoalManager();
+
+        registerListeners(
+                new BingoTeamListener(teamManager, goalManager)
+        );
+
+        registerCommands(
+                new CommandBingo(teamManager, goalManager)
+        );
     }
 
     @Override

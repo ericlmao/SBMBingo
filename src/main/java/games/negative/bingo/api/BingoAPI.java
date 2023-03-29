@@ -10,4 +10,5 @@ public abstract class BingoAPI {
     @Setter(AccessLevel.PROTECTED)
     private static BingoAPI instance;
 
+    public abstract BingoTeamManager getTeamManager();
 }

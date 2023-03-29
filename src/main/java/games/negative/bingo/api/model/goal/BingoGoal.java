@@ -7,6 +7,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.jetbrains.annotations.NotNull;
@@ -56,7 +57,7 @@ public abstract class BingoGoal implements Keyd<String> {
         // Override to add functionality
     }
 
-    public void onInventoryClick(BingoTeam team, InventoryCloseEvent event) {
+    public void onInventoryClick(BingoTeam team, InventoryClickEvent event) {
         // Override to add functionality
     }
 

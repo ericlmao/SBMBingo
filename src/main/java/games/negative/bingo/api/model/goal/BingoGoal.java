@@ -1,5 +1,6 @@
 package games.negative.bingo.api.model.goal;
 
+import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.framework.key.Keyd;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -47,19 +48,19 @@ public abstract class BingoGoal implements Keyd<String> {
         throw new UnsupportedOperationException("Cannot set key of BingoGoal");
     }
 
-    public void onPlayerPickup(EntityPickupItemEvent event) {
+    public void onPlayerPickup(BingoTeam team, EntityPickupItemEvent event) {
         // Override to add functionality
     }
 
-    public void onCraft(CraftItemEvent event) {
+    public void onCraft(BingoTeam team, CraftItemEvent event) {
         // Override to add functionality
     }
 
-    public void onInventoryClick(InventoryCloseEvent event) {
+    public void onInventoryClick(BingoTeam team, InventoryCloseEvent event) {
         // Override to add functionality
     }
 
-    public void onDeath(EntityDeathEvent event) {
+    public void onDeath(BingoTeam team, EntityDeathEvent event) {
         // Override to add functionality
     }
 

@@ -24,11 +24,17 @@ public interface BingoTeam extends Keyd<BingoColor> {
 
     BingoColor getBingoColor();
 
-    Map<BingoGoal, Integer> getProgress();
+    Map<BingoGoal, Integer> getProgresses();
 
     void addProgress(BingoGoal goal, int amount);
 
     void setProgress(BingoGoal goal, int amount);
+
+    void clearProgress(BingoGoal goal);
+
+    default void clearProgress() {
+        getProgresses().clear();
+    }
 
     int getProgress(BingoGoal goal);
 

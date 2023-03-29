@@ -45,7 +45,7 @@ public class BingoTeamImpl implements BingoTeam {
     }
 
     @Override
-    public Map<BingoGoal, Integer> getProgress() {
+    public Map<BingoGoal, Integer> getProgresses() {
         return progress;
     }
 
@@ -65,6 +65,11 @@ public class BingoTeamImpl implements BingoTeam {
         } else {
             progress.put(goal, amount);
         }
+    }
+
+    @Override
+    public void clearProgress(BingoGoal goal) {
+        progress.remove(goal);
     }
 
     @Override

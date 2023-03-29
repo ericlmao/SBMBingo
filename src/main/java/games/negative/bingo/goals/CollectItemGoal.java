@@ -1,9 +1,11 @@
 package games.negative.bingo.goals;
 
 import games.negative.bingo.BingoPlugin;
+import games.negative.bingo.api.event.BingoTeamCompleteGoalEvent;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
 import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.framework.event.Events;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -56,6 +58,8 @@ public class CollectItemGoal extends BingoGoal {
             return;
 
         // Team has completed the goal, do something
+        BingoTeamCompleteGoalEvent complete = new BingoTeamCompleteGoalEvent(team, this);
+        Events.call(complete);
     }
 
     @Override
@@ -90,5 +94,7 @@ public class CollectItemGoal extends BingoGoal {
             return;
 
         // Team has completed the goal, do something
+        BingoTeamCompleteGoalEvent complete = new BingoTeamCompleteGoalEvent(team, this);
+        Events.call(complete);
     }
 }

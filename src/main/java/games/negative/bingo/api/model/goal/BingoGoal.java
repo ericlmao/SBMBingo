@@ -65,11 +65,11 @@ public abstract class BingoGoal implements Keyd<String> {
         // Override to add functionality
     }
 
-    public void onPotionEffect(EntityPotionEffectEvent event) {
+    public void onPotionEffect(BingoTeam team, EntityPotionEffectEvent event) {
         // Override to add functionality
     }
 
-    public void onAdvancement(PlayerAdvancementDoneEvent event) {
+    public void onAdvancement(BingoTeam team, PlayerAdvancementDoneEvent event) {
         // Override to add functionality
     }
 

@@ -11,4 +11,6 @@ public abstract class BingoAPI {
     private static BingoAPI instance;
 
     public abstract BingoTeamManager getTeamManager();
+
+    public abstract BingoGoalManager getGoalManager();
 }

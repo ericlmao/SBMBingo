@@ -10,6 +10,7 @@ import games.negative.bingo.core.structure.BingoTeamImpl;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Team;
 
 import java.util.Collection;
 import java.util.List;
@@ -66,6 +67,21 @@ public class BingoTeamManagerProvider implements BingoTeamManager {
 
     @Override
     public void onReload(FileConfiguration config) {
+
+        for (BingoTeam team : teams) {
+            Team minecraftTeam = team.getMinecraftTeam();
+            if (minecraftTeam == null)
+                continue;
+
+            try {
+                minecraftTeam.unregister();
+            } catch (IllegalStateException e) {
+                // Ignore
+                plugin.getLogger().warning("Team for BingoTeam " + team.getBingoColor().toString() + " was already unregistered!");
+                return;
+            }
+        }
+
         this.teams.clear();
         this.users.clear();
 

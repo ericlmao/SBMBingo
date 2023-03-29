@@ -1,7 +1,9 @@
 package games.negative.bingo.listener;
 
+import games.negative.bingo.api.event.BingoTeamCompleteGoalEvent;
 import games.negative.bingo.api.event.BingoTeamJoinEvent;
 import games.negative.bingo.api.event.BingoTeamQuitEvent;
+import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoTeam;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -34,5 +36,13 @@ public class BingoTeamListener implements Listener {
         minecraftTeam.removeEntry(player.getName());
 
         player.setGlowing(false);
+    }
+
+    @EventHandler
+    public void onCompleteGoal(BingoTeamCompleteGoalEvent event) {
+        BingoTeam team = event.getTeam();
+        BingoGoal goal = event.getGoal();
+
+        
     }
 }

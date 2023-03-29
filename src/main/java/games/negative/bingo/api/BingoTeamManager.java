@@ -2,6 +2,7 @@ package games.negative.bingo.api;
 
 import games.negative.bingo.api.model.team.BingoColor;
 import games.negative.bingo.api.model.team.BingoTeam;
+import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Collection;
 import java.util.Map;
@@ -28,5 +29,9 @@ public interface BingoTeamManager {
     default BingoTeam getUserTeam(UUID uuid) {
         return getUserTeams().get(uuid);
     }
+
+    void onDisable();
+
+    void onReload(FileConfiguration config);
 
 }

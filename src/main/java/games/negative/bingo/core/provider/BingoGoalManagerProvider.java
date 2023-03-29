@@ -21,6 +21,7 @@ public class BingoGoalManagerProvider implements BingoGoalManager {
     public BingoGoalManagerProvider(JavaPlugin plugin, FileConfiguration config) {
         this.goals = Lists.newArrayList();
         this.plugin = plugin;
+        onReload(config);
     }
 
     @Override

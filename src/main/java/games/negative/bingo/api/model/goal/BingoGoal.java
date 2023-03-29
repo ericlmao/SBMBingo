@@ -20,8 +20,8 @@ public abstract class BingoGoal implements Keyd<String> {
 
     public BingoGoal(ConfigurationSection section) {
         this.key = section.getName();
-        this.type = BingoGoalType.valueOf(section.getString("type"));
-        this.amount = section.getInt("amount");
+        this.type = BingoGoalType.valueOf(section.getString("goal-type"));
+        this.amount = section.getInt("goal-amount");
     }
 
     public BingoGoal(String key, BingoGoalType type, int amount) {

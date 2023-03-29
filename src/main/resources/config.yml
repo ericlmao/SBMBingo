@@ -1,0 +1,17 @@
+teams:
+  RED: true
+  BLUE: true
+  GREEN: true
+  YELLOW: true
+  WHITE: true
+  BLACK: true
+  AQUA: true
+  DARK_AQUA: true
+  DARK_BLUE: true
+  DARK_GRAY: true
+  DARK_GREEN: true
+  DARK_PURPLE: true
+  DARK_RED: true
+  GOLD: true
+  GRAY: true
+  LIGHT_PURPLE: true

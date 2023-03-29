@@ -5,6 +5,7 @@ import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.framework.event.Events;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -17,8 +18,8 @@ public class KillGoal extends BingoGoal {
         this.type = EntityType.valueOf(section.getString("goal-entity", "ZOMBIE"));
     }
 
-    public KillGoal(String key, BingoGoalType type, int amount, EntityType entityType) {
-        super(key, type, amount);
+    public KillGoal(String key, BingoGoalType type, int amount, EntityType entityType, String displayName, Material displayMaterial) {
+        super(key, type, amount, displayName, displayMaterial);
         this.type = entityType;
     }
 

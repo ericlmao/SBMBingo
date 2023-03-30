@@ -70,7 +70,7 @@ public class CollectItemGoal extends BingoGoal {
 
         container.set(counted, PersistentDataType.BYTE, (byte) 1);
         item.setItemMeta(meta);
-        
+
         int progress = team.getProgress(this);
         if (progress < getAmount())
             return;

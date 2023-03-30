@@ -6,6 +6,7 @@ import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.bingo.commands.main.CommandBingo;
 import games.negative.bingo.core.provider.BingoAPIProvider;
+import games.negative.bingo.listener.BingoCardListener;
 import games.negative.bingo.listener.BingoTeamListener;
 import games.negative.framework.BasePlugin;
 import org.bukkit.scoreboard.Team;
@@ -30,7 +31,8 @@ public class BingoPlugin extends BasePlugin {
         BingoGoalManager goalManager = api.getGoalManager();
 
         registerListeners(
-                new BingoTeamListener(teamManager, goalManager)
+                new BingoTeamListener(teamManager, goalManager),
+                new BingoCardListener(this)
         );
 
         registerCommands(

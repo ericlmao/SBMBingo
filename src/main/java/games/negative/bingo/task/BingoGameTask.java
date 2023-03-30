@@ -21,5 +21,7 @@ public class BingoGameTask extends BukkitRunnable {
 
         BingoGameEndEvent event = new BingoGameEndEvent(BingoGameEndEvent.Cause.TIMEOUT);
         Events.call(event);
+
+        cancel();
     }
 }

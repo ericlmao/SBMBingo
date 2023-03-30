@@ -69,7 +69,8 @@ public class CollectItemGoal extends BingoGoal {
         team.addProgress(this, amount);
 
         container.set(counted, PersistentDataType.BYTE, (byte) 1);
-
+        item.setItemMeta(meta);
+        
         int progress = team.getProgress(this);
         if (progress < getAmount())
             return;

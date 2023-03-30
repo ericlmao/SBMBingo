@@ -16,6 +16,12 @@ teams:
   GRAY: true
   LIGHT_PURPLE: true
 
+bingo-card:
+  name: "&aBingo Card &7(Right Click)"
+  material: FILLED_MAP
+  slot: 9
+  locked: true # If true, the item will be locked in the inventory
+
 goals:
   COLLECT_DIAMOND: # ID of the Goal
     name: "&fCollect a &bDiamond" # Display Name of the Goal (in the GUI)

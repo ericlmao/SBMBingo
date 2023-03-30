@@ -19,6 +19,14 @@ public enum Locale {
     NOT_ON_TEAM("not-on-team", List.of(
             "&cYou are not on a team!")
     ),
+
+    USER_LEFT_TEAM("user-left-team", List.of(
+            "&8[&6Teams&8] &6%player% &ehas left %team%&e!"
+    )),
+
+    USER_JOINED_TEAM("user-joined-team", List.of(
+            "&8[&6Teams&8] &6%player% &ehas joined %team%&e!"
+    )),
     ;
     private final String id;
     private final List<String> defaultMessage;

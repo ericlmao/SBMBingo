@@ -2,10 +2,13 @@ package games.negative.bingo.menu;
 
 import com.google.common.collect.Lists;
 import games.negative.bingo.api.BingoTeamManager;
+import games.negative.bingo.api.event.team.BingoTeamJoinEvent;
+import games.negative.bingo.api.event.team.BingoTeamQuitEvent;
 import games.negative.bingo.api.model.team.BingoColor;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.bingo.core.Locale;
 import games.negative.framework.base.itembuilder.ItemBuilder;
+import games.negative.framework.event.Events;
 import games.negative.framework.gui.GUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -61,6 +64,9 @@ public class BingoTeamMenu extends GUI {
 
                     Locale.USER_LEFT_TEAM.replace("%player%", player.getName())
                             .replace("%team%", bingoColor.getColor() + teamName).broadcast();
+
+                    BingoTeamQuitEvent quit = new BingoTeamQuitEvent(team, player);
+                    Events.call(quit);
                 } else {
                     // Join Team
                     team.addMember(uuid);
@@ -72,6 +78,9 @@ public class BingoTeamMenu extends GUI {
 
                     Locale.USER_JOINED_TEAM.replace("%player%", player.getName())
                             .replace("%team%", color.getColor() + teamName).broadcast();
+
+                    BingoTeamJoinEvent join = new BingoTeamJoinEvent(team, player);
+                    Events.call(join);
                 }
                 player.closeInventory();
             });

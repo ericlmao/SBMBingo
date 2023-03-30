@@ -5,6 +5,7 @@ import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.bingo.commands.main.CommandBingo;
+import games.negative.bingo.core.Locale;
 import games.negative.bingo.core.provider.BingoAPIProvider;
 import games.negative.bingo.listener.BingoCardListener;
 import games.negative.bingo.listener.BingoTeamListener;
@@ -20,6 +21,8 @@ public class BingoPlugin extends BasePlugin {
     @Override
     public void onEnable() {
         super.onEnable();
+
+        Locale.init(this);
 
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();

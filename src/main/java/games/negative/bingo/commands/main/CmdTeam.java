@@ -1,15 +1,14 @@
-package games.negative.bingo.commands.main.team;
+package games.negative.bingo.commands.main;
 
+import games.negative.bingo.api.BingoTeamManager;
 import games.negative.framework.command.SubCommand;
 import org.bukkit.command.CommandSender;
 
 public class CmdTeam extends SubCommand {
 
-    public CmdTeam() {
-        addSubCommands(
-                new CmdJoin(),
-                new CmdLeave()
-        );
+    private final BingoTeamManager manager;
+    public CmdTeam(BingoTeamManager manager) {
+        this.manager = manager;
     }
 
     @Override

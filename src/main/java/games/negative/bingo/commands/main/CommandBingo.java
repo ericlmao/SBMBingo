@@ -2,7 +2,6 @@ package games.negative.bingo.commands.main;
 
 import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
-import games.negative.bingo.commands.main.team.CmdTeam;
 import games.negative.framework.command.Command;
 import games.negative.framework.command.annotation.CommandInfo;
 import org.bukkit.command.CommandSender;
@@ -17,7 +16,7 @@ public class CommandBingo extends Command {
     public CommandBingo(BingoTeamManager teamManager, BingoGoalManager goalManager) {
         addSubCommands(
                 new CmdCard(goalManager, teamManager),
-                new CmdTeam()
+                new CmdTeam(teamManager)
         );
     }
 

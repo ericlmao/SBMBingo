@@ -8,7 +8,8 @@ import org.bukkit.command.CommandSender;
 
 @CommandInfo(
         name = "bingo",
-        description = "Main command for Bingo"
+        description = "Main command for Bingo",
+        aliases = {"b"}
 )
 public class CommandBingo extends Command {
 

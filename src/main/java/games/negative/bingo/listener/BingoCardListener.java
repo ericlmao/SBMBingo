@@ -2,6 +2,7 @@ package games.negative.bingo.listener;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import games.negative.bingo.api.event.BingoConfigReloadEvent;
 import games.negative.framework.base.itembuilder.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -121,5 +122,20 @@ public class BingoCardListener implements Listener {
             return;
 
         event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onReload(BingoConfigReloadEvent event) {
+        FileConfiguration config = event.getConfig();
+        ConfigurationSection section = config.getConfigurationSection("bingo-card");
+        Preconditions.checkNotNull(section, "bingo-card section is null");
+
+        String name = section.getString("name", "&aBingo Card &7(Right Click)");
+        Material material = Material.valueOf(section.getString("material"));
+
+        this.cardItem = ItemBuilder.newItemBuilder(material).setName(name).build();
+
+        this.slot = section.getInt("slot", 9);
+        this.locked = section.getBoolean("locked", true);
     }
 }

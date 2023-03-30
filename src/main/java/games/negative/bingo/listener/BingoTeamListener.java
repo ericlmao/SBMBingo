@@ -2,12 +2,14 @@ package games.negative.bingo.listener;
 
 import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
+import games.negative.bingo.api.event.BingoConfigReloadEvent;
 import games.negative.bingo.api.event.BingoTeamCompleteGoalEvent;
 import games.negative.bingo.api.event.BingoTeamJoinEvent;
 import games.negative.bingo.api.event.BingoTeamQuitEvent;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoTeam;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -140,5 +142,12 @@ public class BingoTeamListener implements Listener {
         for (BingoGoal goal : goalManager.getBingoGoals()) {
             goal.onAdvancement(team, event);
         }
+    }
+
+    @EventHandler
+    public void onReload(BingoConfigReloadEvent event) {
+        FileConfiguration config = event.getConfig();
+        goalManager.onReload(config);
+        manager.onReload(config);
     }
 }

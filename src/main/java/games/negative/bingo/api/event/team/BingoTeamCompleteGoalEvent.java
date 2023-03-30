@@ -1,4 +1,4 @@
-package games.negative.bingo.api.event;
+package games.negative.bingo.api.event.team;
 
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoTeam;

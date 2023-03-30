@@ -1,7 +1,7 @@
 package games.negative.bingo.goals;
 
 import games.negative.bingo.BingoPlugin;
-import games.negative.bingo.api.event.BingoTeamCompleteGoalEvent;
+import games.negative.bingo.api.event.team.BingoTeamCompleteGoalEvent;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
 import games.negative.bingo.api.model.team.BingoTeam;

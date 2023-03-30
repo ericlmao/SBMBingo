@@ -1,4 +1,5 @@
 name: SBMBingo
 version: '1.0.0'
 main: games.negative.bingo.BingoPlugin
+api-version: 1.19
 load: POSTWORLD

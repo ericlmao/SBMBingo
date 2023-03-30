@@ -59,7 +59,6 @@ public class BingoTeamImpl implements BingoTeam {
 
     @Override
     public void removeMember(UUID uuid) {
-        team.removeEntry(Bukkit.getOfflinePlayer(uuid).getName());
         members.remove(uuid);
     }
 

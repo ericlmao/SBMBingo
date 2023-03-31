@@ -82,7 +82,7 @@ public class BingoCardListener implements Listener {
             inv.remove(duplicateItem);
         }
 
-        inv.setItem(slot, item);
+        inv.setItem((slot - 1), item);
 
         player.updateInventory();
     }

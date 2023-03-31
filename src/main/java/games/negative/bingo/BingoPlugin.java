@@ -44,7 +44,7 @@ public class BingoPlugin extends BasePlugin {
 
         registerListeners(
                 new BingoTeamListener(teamManager, goalManager),
-                new BingoCardListener(this)
+                new BingoCardListener(this, teamManager, goalManager)
         );
 
         registerCommands(

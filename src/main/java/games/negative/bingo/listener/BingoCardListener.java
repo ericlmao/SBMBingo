@@ -2,7 +2,12 @@ package games.negative.bingo.listener;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import games.negative.bingo.api.BingoGoalManager;
+import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.event.BingoConfigReloadEvent;
+import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.bingo.core.Locale;
+import games.negative.bingo.menu.BingoGoalMenu;
 import games.negative.framework.base.itembuilder.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -11,8 +16,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
@@ -30,7 +37,13 @@ public class BingoCardListener implements Listener {
     private int slot;
     private boolean locked;
 
-    public BingoCardListener(JavaPlugin plugin) {
+    private final BingoTeamManager teams;
+    private final BingoGoalManager goals;
+
+    public BingoCardListener(JavaPlugin plugin, BingoTeamManager teams, BingoGoalManager goals) {
+        this.teams = teams;
+        this.goals = goals;
+
         this.card = new NamespacedKey(plugin, "bingo-card");
 
         FileConfiguration config = plugin.getConfig();
@@ -126,6 +139,34 @@ public class BingoCardListener implements Listener {
 
         Player player = (Player) event.getWhoClicked();
         player.updateInventory();
+    }
+
+    @EventHandler
+    public void onClick(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        ItemStack item = event.getItem();
+        if (item == null || item.getType() == Material.AIR)
+            return;
+
+        Action action = event.getAction();
+        if (action != Action.RIGHT_CLICK_AIR && action != Action.RIGHT_CLICK_BLOCK)
+            return;
+
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null)
+            return;
+
+        PersistentDataContainer container = meta.getPersistentDataContainer();
+        if (!container.has(card, PersistentDataType.BYTE))
+            return;
+
+        BingoTeam team = teams.getUserTeam(player.getUniqueId());
+        if (team == null) {
+            Locale.NOT_ON_TEAM.send(player);
+            return;
+        }
+
+        new BingoGoalMenu(team, goals).open(player);
     }
 
     @EventHandler

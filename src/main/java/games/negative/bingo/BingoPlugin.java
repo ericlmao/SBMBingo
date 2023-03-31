@@ -1,5 +1,7 @@
 package games.negative.bingo;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import games.negative.bingo.api.BingoAPI;
 import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
@@ -9,7 +11,9 @@ import games.negative.bingo.core.Locale;
 import games.negative.bingo.core.provider.BingoAPIProvider;
 import games.negative.bingo.listener.BingoCardListener;
 import games.negative.bingo.listener.BingoTeamListener;
+import games.negative.bingo.state.GameState;
 import games.negative.framework.BasePlugin;
+import games.negative.framework.json.JSONConfigManager;
 import org.bukkit.scoreboard.Team;
 
 import java.util.Collection;
@@ -17,6 +21,7 @@ import java.util.Collection;
 public class BingoPlugin extends BasePlugin {
 
     private BingoAPI api;
+    private GameState state;
 
     @Override
     public void onEnable() {
@@ -27,6 +32,10 @@ public class BingoPlugin extends BasePlugin {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
         reloadConfig();
+
+        JSONConfigManager json = getJSONConfigManager();
+        Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+        this.state = json.loadOrCreate(getDataFolder().getPath(), "state.json", GameState.class, new GameState(), gson);
 
         this.api = new BingoAPIProvider(this, getConfig());
 
@@ -46,6 +55,7 @@ public class BingoPlugin extends BasePlugin {
     @Override
     public void onDisable() {
         super.onDisable();
+        saveState();
 
         Collection<BingoTeam> teams = api.getTeamManager().getTeams();
         for (BingoTeam team : teams) {
@@ -63,5 +73,15 @@ public class BingoPlugin extends BasePlugin {
         }
 
         api.getTeamManager().onDisable();
+    }
+
+    public GameState getState() {
+        return state;
+    }
+
+    public void saveState() {
+        JSONConfigManager json = getJSONConfigManager();
+        Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
+        json.save(getDataFolder().getPath(), "state.json", state, gson);
     }
 }

@@ -122,6 +122,10 @@ public class BingoCardListener implements Listener {
             return;
 
         event.setCancelled(true);
+        event.getView().setCursor(null);
+
+        Player player = (Player) event.getWhoClicked();
+        player.updateInventory();
     }
 
     @EventHandler

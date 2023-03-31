@@ -54,9 +54,7 @@ public class BingoTeamMenu extends GUI {
                 if (userTeam != null) {
                     // Leave Team
                     BingoColor bingoColor = userTeam.getBingoColor();
-                    String teamName = bingoColor.name();
-                    teamName = teamName.replace("_", " ");
-                    teamName = teamName.substring(0, 1).toUpperCase() + teamName.substring(1).toLowerCase();
+                    String teamName = TextUtil.capitalize(bingoColor.name().replace("_", " "));
 
                     userTeam.removeMember(uuid);
                     manager.removeUserTeam(uuid);
@@ -71,9 +69,7 @@ public class BingoTeamMenu extends GUI {
                     team.addMember(uuid);
                     manager.addUserTeam(uuid, team);
 
-                    String teamName = color.name();
-                    teamName = teamName.replace("_", " ");
-                    teamName = teamName.substring(0, 1).toUpperCase() + teamName.substring(1).toLowerCase();
+                    String teamName = TextUtil.capitalize(color.name().replace("_", " "));
 
                     Locale.USER_JOINED_TEAM.replace("%player%", player.getName())
                             .replace("%team%", color.getColor() + teamName).broadcast();

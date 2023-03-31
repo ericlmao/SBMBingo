@@ -27,6 +27,14 @@ public enum Locale {
     USER_JOINED_TEAM("user-joined-team", List.of(
             "&8[&6Teams&8] &6%player% &ehas joined %team%&e!"
     )),
+
+    STATE_UPDATED("state-updated", List.of(
+            "&8[&6Bingo&8] &eThe game state has been changed to %state%&e!"
+    )),
+
+    CONFIG_RELOADED("config-reloaded", List.of(
+            "&8[&6Bingo&8] &eThe configuration files have been reloaded."
+    )),
     ;
     private final String id;
     private final List<String> defaultMessage;

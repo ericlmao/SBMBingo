@@ -7,6 +7,7 @@ import games.negative.bingo.api.event.team.BingoTeamQuitEvent;
 import games.negative.bingo.api.model.team.BingoColor;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.bingo.core.Locale;
+import games.negative.bingo.core.util.TextUtil;
 import games.negative.framework.base.itembuilder.ItemBuilder;
 import games.negative.framework.event.Events;
 import games.negative.framework.gui.GUI;
@@ -28,9 +29,7 @@ public class BingoTeamMenu extends GUI {
             BingoColor color = team.getBingoColor();
             Material material = color.getMaterial();
 
-            String name = color.name();
-            name = name.replace("_", " ");
-            name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+            String name = TextUtil.capitalize(color.name().replace("_", " "));
 
             Collection<UUID> members = team.getMembers();
             List<String> lore = Lists.newArrayList();

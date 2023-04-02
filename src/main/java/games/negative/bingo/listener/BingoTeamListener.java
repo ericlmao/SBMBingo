@@ -59,7 +59,7 @@ public class BingoTeamListener implements Listener {
         BingoTeam team = event.getTeam();
         BingoGoal goal = event.getGoal();
 
-
+        
     }
 
     @EventHandler

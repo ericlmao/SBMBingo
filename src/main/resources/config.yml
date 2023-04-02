@@ -16,6 +16,8 @@ teams:
   GRAY: true
   LIGHT_PURPLE: true
 
+max-game-duration: "1h" # Maximum duration of the game
+
 bingo-card:
   name: "&aBingo Card &7(Right Click)"
   material: FILLED_MAP

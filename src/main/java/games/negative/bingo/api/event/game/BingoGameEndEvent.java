@@ -1,27 +1,35 @@
 package games.negative.bingo.api.event.game;
 
+import games.negative.bingo.api.model.BingoGame;
 import games.negative.bingo.api.model.team.BingoTeam;
-import games.negative.framework.event.PluginEvent;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class BingoGameEndEvent extends PluginEvent {
+public class BingoGameEndEvent extends BingoGameEvent {
 
     private final Cause cause;
     private BingoTeam winner;
     private CommandSender canceler;
 
-    public BingoGameEndEvent(@NotNull Cause cause) {
+    public BingoGameEndEvent(BingoGame game) {
+        super(game);
+        this.cause = Cause.UNKNOWN;
+    }
+
+    public BingoGameEndEvent(BingoGame game, Cause cause) {
+        super(game);
         this.cause = cause;
     }
 
-    public BingoGameEndEvent(@NotNull BingoTeam winner) {
-        this.winner = winner;
+    public BingoGameEndEvent(BingoGame game, BingoTeam winner) {
+        super(game);
         this.cause = Cause.WIN;
+        this.winner = winner;
     }
 
-    public BingoGameEndEvent(CommandSender canceler) {
+    public BingoGameEndEvent(BingoGame game, CommandSender canceler) {
+        super(game);
         this.canceler = canceler;
         this.cause = Cause.CANCELLED;
     }

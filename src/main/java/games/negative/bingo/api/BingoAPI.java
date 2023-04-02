@@ -13,4 +13,6 @@ public abstract class BingoAPI {
     public abstract BingoTeamManager getTeamManager();
 
     public abstract BingoGoalManager getGoalManager();
+
+    public abstract BingoGameManager getGameManager();
 }

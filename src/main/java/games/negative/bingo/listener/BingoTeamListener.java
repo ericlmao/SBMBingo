@@ -1,5 +1,6 @@
 package games.negative.bingo.listener;
 
+import games.negative.bingo.api.BingoGameManager;
 import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.event.BingoConfigReloadEvent;
@@ -8,6 +9,7 @@ import games.negative.bingo.api.event.team.BingoTeamJoinEvent;
 import games.negative.bingo.api.event.team.BingoTeamQuitEvent;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.framework.util.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -20,14 +22,18 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.scoreboard.Team;
 
+import java.util.Map;
+
 public class BingoTeamListener implements Listener {
 
     private final BingoTeamManager manager;
     private final BingoGoalManager goalManager;
+    private final BingoGameManager gameManager;
 
-    public BingoTeamListener(BingoTeamManager manager, BingoGoalManager goalManager) {
+    public BingoTeamListener(BingoTeamManager manager, BingoGoalManager goalManager, BingoGameManager gameManager) {
         this.manager = manager;
         this.goalManager = goalManager;
+        this.gameManager = gameManager;
     }
 
     @EventHandler
@@ -59,7 +65,29 @@ public class BingoTeamListener implements Listener {
         BingoTeam team = event.getTeam();
         BingoGoal goal = event.getGoal();
 
+        Utils.broadcast("Team " + team.getBingoColor().getRealPeopleWord() + " has completed a Goal");
 
+        // Check if team has all goals completed, if so then they win
+
+        //todo: see if this can be optimized / improved
+        Map<BingoGoal, Integer> progresses = team.getProgresses();
+        int completed = 0;
+        int required = goalManager.getBingoGoals().size();
+
+        for (Map.Entry<BingoGoal, Integer> entry : progresses.entrySet()) {
+            BingoGoal key = entry.getKey();
+            Integer value = entry.getValue();
+
+            if (value >= key.getAmount()) {
+                completed++;
+            }
+        }
+
+        if (completed < required)
+            return;
+
+        // Team has won
+        gameManager.stop(team);
     }
 
     @EventHandler

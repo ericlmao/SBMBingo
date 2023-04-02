@@ -53,7 +53,7 @@ public class BingoPlugin extends BasePlugin {
         BingoGameManager gameManager = api.getGameManager();
 
         registerListeners(
-                new BingoTeamListener(teamManager, goalManager),
+                new BingoTeamListener(teamManager, goalManager, gameManager),
                 new BingoCardListener(this, teamManager, goalManager),
                 new BingoGameListener(this, gameManager, teamManager, goalManager)
         );

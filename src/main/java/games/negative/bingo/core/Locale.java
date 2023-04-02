@@ -35,6 +35,15 @@ public enum Locale {
     CONFIG_RELOADED("config-reloaded", List.of(
             "&8[&6Bingo&8] &eThe configuration files have been reloaded."
     )),
+
+    BINGO_GAME_ALREADY_RUNNING("bingo-game-already-running", List.of(
+            "&8[&6Bingo&8] &cA game is already running!"
+    )),
+
+    BINGO_GAME_NOT_RUNNING("bingo-game-not-running", List.of(
+            "&8[&6Bingo&8] &cThere is no game running!"
+    )),
+
     ;
     private final String id;
     private final List<String> defaultMessage;

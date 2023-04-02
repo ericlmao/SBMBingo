@@ -1,5 +1,6 @@
 package games.negative.bingo.listener;
 
+import com.google.common.collect.Lists;
 import games.negative.bingo.BingoPlugin;
 import games.negative.bingo.api.BingoGameManager;
 import games.negative.bingo.api.BingoGoalManager;
@@ -7,9 +8,11 @@ import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.event.BingoConfigReloadEvent;
 import games.negative.bingo.api.event.game.BingoGameEndEvent;
 import games.negative.bingo.api.event.game.BingoGameStartEvent;
+import games.negative.bingo.api.model.BingoGame;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.bingo.core.util.TeamUtil;
 import games.negative.framework.util.TimeUtil;
+import games.negative.framework.util.Utils;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -17,6 +20,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 public class BingoGameListener implements Listener {
 
@@ -47,8 +52,33 @@ public class BingoGameListener implements Listener {
         if (event.getCause() != BingoGameEndEvent.Cause.WIN)
             return;
 
+        BingoGame game = event.getGame();
+
+        long started = game.getStarted();
+        long now = System.currentTimeMillis();
+
+        String formatted = TimeUtil.format((now + started), now);
+
         BingoTeam winner = event.getWinner();
         // This is the winner team, do something with it
+        assert winner != null;
+
+        Utils.broadcast("&aWinner: &f" + winner.getBingoColor().getRealPeopleWord());
+        Utils.broadcast("&aGame lasted: &f" + formatted);
+
+        clearTeams();
+    }
+
+    private void clearTeams() {
+        for (BingoTeam team : teamManager.getTeams()) {
+            List<UUID> toRemove = Lists.newArrayList(team.getMembers());
+            for (UUID uuid : toRemove) {
+                team.removeMember(uuid);
+                teamManager.removeUserTeam(uuid);
+            }
+
+            team.clearProgress();
+        }
     }
 
     @EventHandler
@@ -58,6 +88,8 @@ public class BingoGameListener implements Listener {
 
         CommandSender canceler = event.getCanceler();
         // This is the canceler, do something with it
+
+        clearTeams();
     }
 
     @EventHandler
@@ -66,6 +98,7 @@ public class BingoGameListener implements Listener {
             return;
 
         // This is a timeout, do something with it
+        clearTeams();
     }
 
     @EventHandler
@@ -74,7 +107,7 @@ public class BingoGameListener implements Listener {
             return;
 
         // Bingo game ended for an unknown reason, do something with it
-
+        clearTeams();
     }
 
     @EventHandler

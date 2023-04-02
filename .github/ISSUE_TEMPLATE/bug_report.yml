@@ -1,0 +1,23 @@
+name: Bug Report
+
+description: Report a Bug!
+
+title: "[Bug Report] "
+
+labels: ["bug"]
+
+body:
+  - type: textarea
+
+    attributes:
+
+      label: "Bug Report Description"
+
+      description: "Provide a small description of the bug you have encountered."
+
+      placeholder: "I was trying to do something and it didn't work!"
+
+    validations:
+
+      required: true
+

@@ -8,6 +8,7 @@ import games.negative.bingo.api.exception.BingoGameRunningException;
 import games.negative.bingo.api.model.BingoGame;
 import games.negative.bingo.core.structure.BingoGameImpl;
 import games.negative.framework.event.Events;
+import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.Nullable;
 
 public class BingoGameManagerProvider implements BingoGameManager {
@@ -41,6 +42,20 @@ public class BingoGameManagerProvider implements BingoGameManager {
         }
 
         BingoGameEndEvent event = new BingoGameEndEvent(game);
+        Events.call(event);
+
+        game.getTask().cancel();
+        game = null;
+    }
+
+    @Override
+    public void stop(CommandSender canceler) {
+        if (game == null) {
+            // No game is currently active, throw exception
+            throw new BingoGameNotRunningException();
+        }
+
+        BingoGameEndEvent event = new BingoGameEndEvent(game, canceler);
         Events.call(event);
 
         game.getTask().cancel();

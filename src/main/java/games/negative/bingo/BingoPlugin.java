@@ -3,9 +3,11 @@ package games.negative.bingo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import games.negative.bingo.api.BingoAPI;
+import games.negative.bingo.api.BingoGameManager;
 import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.bingo.commands.admin.CommandBingoAdmin;
 import games.negative.bingo.commands.main.CommandBingo;
 import games.negative.bingo.core.Locale;
 import games.negative.bingo.core.provider.BingoAPIProvider;
@@ -15,6 +17,7 @@ import games.negative.bingo.listener.BingoTeamListener;
 import games.negative.bingo.state.GameState;
 import games.negative.framework.BasePlugin;
 import games.negative.framework.json.JSONConfigManager;
+import games.negative.framework.util.TimeUtil;
 import org.bukkit.scoreboard.Team;
 
 import java.util.Collection;
@@ -23,6 +26,7 @@ public class BingoPlugin extends BasePlugin {
 
     private BingoAPI api;
     private GameState state;
+    private long gameDuration; // dont know where to put this
 
     @Override
     public void onEnable() {
@@ -34,6 +38,10 @@ public class BingoPlugin extends BasePlugin {
         saveDefaultConfig();
         reloadConfig();
 
+        String formatted = getConfig().getString("max-game-duration", "1h");
+        long duration = TimeUtil.longFromString(formatted);
+        setGameDuration(duration);
+
         JSONConfigManager json = getJSONConfigManager();
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         this.state = json.loadOrCreate(getDataFolder().getPath(), "state.json", GameState.class, new GameState(), gson);
@@ -42,15 +50,17 @@ public class BingoPlugin extends BasePlugin {
 
         BingoTeamManager teamManager = api.getTeamManager();
         BingoGoalManager goalManager = api.getGoalManager();
+        BingoGameManager gameManager = api.getGameManager();
 
         registerListeners(
                 new BingoTeamListener(teamManager, goalManager),
                 new BingoCardListener(this, teamManager, goalManager),
-                new BingoGameListener(api.getGameManager(), teamManager, goalManager)
+                new BingoGameListener(this, gameManager, teamManager, goalManager)
         );
 
         registerCommands(
-                new CommandBingo(teamManager, goalManager)
+                new CommandBingo(teamManager, goalManager),
+                new CommandBingoAdmin(this, gameManager)
         );
     }
 
@@ -85,5 +95,13 @@ public class BingoPlugin extends BasePlugin {
         JSONConfigManager json = getJSONConfigManager();
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
         json.save(getDataFolder().getPath(), "state.json", state, gson);
+    }
+
+    public long getGameDuration() {
+        return gameDuration;
+    }
+
+    public void setGameDuration(long gameDuration) {
+        this.gameDuration = gameDuration;
     }
 }

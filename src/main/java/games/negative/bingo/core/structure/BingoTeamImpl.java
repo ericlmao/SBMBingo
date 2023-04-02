@@ -6,7 +6,10 @@ import com.google.common.collect.Maps;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoColor;
 import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.bingo.core.util.TextUtil;
+import games.negative.framework.util.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
@@ -39,7 +42,11 @@ public class BingoTeamImpl implements BingoTeam {
             temp = board.registerNewTeam("bingo-" + color);
 
         this.team = temp;
-        team.setColor(color.getColor());
+
+        ChatColor chatColor = color.getColor();
+
+        team.setColor(chatColor);
+        team.setPrefix(Utils.color(chatColor + "&l" + color.getRealPeopleWord() + " " + chatColor));
     }
 
     @Override

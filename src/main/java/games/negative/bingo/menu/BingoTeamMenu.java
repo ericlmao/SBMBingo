@@ -7,7 +7,6 @@ import games.negative.bingo.api.event.team.BingoTeamQuitEvent;
 import games.negative.bingo.api.model.team.BingoColor;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.bingo.core.Locale;
-import games.negative.bingo.core.util.TextUtil;
 import games.negative.framework.base.itembuilder.ItemBuilder;
 import games.negative.framework.event.Events;
 import games.negative.framework.gui.GUI;
@@ -29,8 +28,6 @@ public class BingoTeamMenu extends GUI {
             BingoColor color = team.getBingoColor();
             Material material = color.getMaterial();
 
-            String name = TextUtil.capitalize(color.name().replace("_", " "));
-
             Collection<UUID> members = team.getMembers();
             List<String> lore = Lists.newArrayList();
 
@@ -38,7 +35,7 @@ public class BingoTeamMenu extends GUI {
                 lore.add("&8 - &e" + Bukkit.getOfflinePlayer(member).getName());
             }
 
-            ItemBuilder builder = ItemBuilder.newItemBuilder(material).setName(color.getColor() + name).setLore(lore);
+            ItemBuilder builder = ItemBuilder.newItemBuilder(material).setName(color.getColor() + color.getRealPeopleWord()).setLore(lore);
             addItemClickEvent(player -> {
                 BingoTeam userTeam = manager.getUserTeam(player.getUniqueId());
                 if (userTeam == null || userTeam.getBingoColor() != color) {
@@ -54,13 +51,11 @@ public class BingoTeamMenu extends GUI {
                 if (userTeam != null) {
                     // Leave Team
                     BingoColor bingoColor = userTeam.getBingoColor();
-                    String teamName = TextUtil.capitalize(bingoColor.name().replace("_", " "));
-
                     userTeam.removeMember(uuid);
                     manager.removeUserTeam(uuid);
 
                     Locale.USER_LEFT_TEAM.replace("%player%", player.getName())
-                            .replace("%team%", bingoColor.getColor() + teamName).broadcast();
+                            .replace("%team%", bingoColor.getColor() + bingoColor.getRealPeopleWord()).broadcast();
 
                     BingoTeamQuitEvent quit = new BingoTeamQuitEvent(team, player);
                     Events.call(quit);
@@ -69,10 +64,8 @@ public class BingoTeamMenu extends GUI {
                     team.addMember(uuid);
                     manager.addUserTeam(uuid, team);
 
-                    String teamName = TextUtil.capitalize(color.name().replace("_", " "));
-
                     Locale.USER_JOINED_TEAM.replace("%player%", player.getName())
-                            .replace("%team%", color.getColor() + teamName).broadcast();
+                            .replace("%team%", color.getColor() + color.getRealPeopleWord()).broadcast();
 
                     BingoTeamJoinEvent join = new BingoTeamJoinEvent(team, player);
                     Events.call(join);

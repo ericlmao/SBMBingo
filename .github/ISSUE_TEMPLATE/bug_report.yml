@@ -1,1 +1,46 @@
+name: Bug Report
+
+description: Report a Bug!
+
+title: "[Bug Report] "
+
+labels: ["type: bug"]
+
+body:
+
+  - type: markdown
+
+    attributes:
+
+      value: |-
+
+        Please join the [Discord Server](https://discord.negative.games) for questions or ask them in [our Discussions](https://github.com/Negative-Games/Framework/discussions).
+
+        
+
+        Keep in mind that this isn't the place to learn Java.  
+
+        Please head over to [StackOverflow](https://stackoverflow.com/questions/tagged/java) for your general programming questions.
+
+  - type: checkboxes
+
+    attributes:
+
+      label: General Troubleshooting
+
+      
+
+  - type: textarea
+
+    attributes:
+
+      label: "Bug Report Description"
+
+      description: "Provide a small description of the bug you have encountered."
+
+      placeholder: "I was trying to do something and it didn't work!"
+
+    validations:
+
+      required: true
 

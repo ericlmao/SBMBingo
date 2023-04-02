@@ -10,6 +10,7 @@ import games.negative.bingo.commands.main.CommandBingo;
 import games.negative.bingo.core.Locale;
 import games.negative.bingo.core.provider.BingoAPIProvider;
 import games.negative.bingo.listener.BingoCardListener;
+import games.negative.bingo.listener.BingoGameListener;
 import games.negative.bingo.listener.BingoTeamListener;
 import games.negative.bingo.state.GameState;
 import games.negative.framework.BasePlugin;
@@ -44,7 +45,8 @@ public class BingoPlugin extends BasePlugin {
 
         registerListeners(
                 new BingoTeamListener(teamManager, goalManager),
-                new BingoCardListener(this, teamManager, goalManager)
+                new BingoCardListener(this, teamManager, goalManager),
+                new BingoGameListener(api.getGameManager(), teamManager, goalManager)
         );
 
         registerCommands(

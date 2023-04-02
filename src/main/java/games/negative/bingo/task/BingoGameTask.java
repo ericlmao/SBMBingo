@@ -1,5 +1,6 @@
 package games.negative.bingo.task;
 
+import games.negative.bingo.api.BingoAPI;
 import games.negative.bingo.api.event.game.BingoGameEndEvent;
 import games.negative.bingo.api.model.BingoGame;
 import games.negative.framework.event.Events;
@@ -17,9 +18,6 @@ public class BingoGameTask extends BukkitRunnable {
         if (System.currentTimeMillis() < (game.getStarted() + game.getTimeLimit()))
             return;
 
-        BingoGameEndEvent event = new BingoGameEndEvent(game, BingoGameEndEvent.Cause.TIMEOUT);
-        Events.call(event);
-
-        cancel();
+        BingoAPI.getInstance().getGameManager().stop();
     }
 }

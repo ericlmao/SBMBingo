@@ -4,7 +4,7 @@ description: Report a Bug!
 
 title: "[Bug Report] "
 
-labels: ["type: bug"]
+labels: ["bug"]
 
 body:
   - type: textarea

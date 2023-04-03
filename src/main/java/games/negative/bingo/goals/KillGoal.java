@@ -29,6 +29,10 @@ public class KillGoal extends BingoGoal {
         if (this.type != type)
             return;
 
+        int preProgress = team.getProgress(this);
+        if (preProgress >= getAmount())
+            return;
+
         team.addProgress(this, 1);
 
         int progress = team.getProgress(this);

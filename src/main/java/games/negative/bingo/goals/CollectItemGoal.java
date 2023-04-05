@@ -2,6 +2,7 @@ package games.negative.bingo.goals;
 
 import games.negative.bingo.BingoPlugin;
 import games.negative.bingo.api.event.team.BingoTeamCompleteGoalEvent;
+import games.negative.bingo.api.event.team.BingoTeamGoalProgressEvent;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
 import games.negative.bingo.api.model.team.BingoTeam;
@@ -72,6 +73,9 @@ public class CollectItemGoal extends BingoGoal {
 
         if ((progress + amount) > getAmount())
             amount = getAmount();
+
+        BingoTeamGoalProgressEvent progressEvent = new BingoTeamGoalProgressEvent(team, this, progress, amount);
+        Events.call(progressEvent);
 
         team.addProgress(this, amount);
 

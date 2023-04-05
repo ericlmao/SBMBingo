@@ -1,6 +1,7 @@
 package games.negative.bingo.goals;
 
 import games.negative.bingo.api.event.team.BingoTeamCompleteGoalEvent;
+import games.negative.bingo.api.event.team.BingoTeamGoalProgressEvent;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
 import games.negative.bingo.api.model.team.BingoTeam;
@@ -36,6 +37,10 @@ public class KillGoal extends BingoGoal {
         team.addProgress(this, 1);
 
         int progress = team.getProgress(this);
+
+        BingoTeamGoalProgressEvent progressEvent = new BingoTeamGoalProgressEvent(team, this, preProgress, progress);
+        Events.call(progressEvent);
+
         if (progress < getAmount())
             return;
 

@@ -9,6 +9,7 @@ import games.negative.bingo.api.event.team.BingoTeamJoinEvent;
 import games.negative.bingo.api.event.team.BingoTeamQuitEvent;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.bingo.core.util.TextUtil;
 import games.negative.framework.util.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -65,7 +66,7 @@ public class BingoTeamListener implements Listener {
         BingoTeam team = event.getTeam();
         BingoGoal goal = event.getGoal();
 
-        Utils.broadcast("Team " + team.getBingoColor().getRealPeopleWord() + " has completed a Goal");
+        Utils.broadcast("Team " + team.getBingoColor().getRealPeopleWord() + " has completed &a" + TextUtil.stripColor(goal.getDisplay()));
 
         // Check if team has all goals completed, if so then they win
 

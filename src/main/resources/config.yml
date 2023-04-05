@@ -56,3 +56,9 @@ goals:
     goal-type: "POTION_EFFECT"
     goal-potion-effect: speed
 
+  FIND_DESERT:
+    name: "&fFind a &6Desert"
+    material: SAND
+
+    goal-type: "FIND_BIOME"
+    goal-biome: DESERT

@@ -7,10 +7,12 @@ import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.event.BingoConfigReloadEvent;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.bingo.core.Locale;
+import games.negative.bingo.core.util.ActionBar;
 import games.negative.bingo.menu.BingoGoalMenu;
 import games.negative.framework.base.itembuilder.ItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -62,8 +64,6 @@ public class BingoCardListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-
-        //todo check for status of the plugin if it's enabled or not
 
         ItemStack item = cardItem.clone();
         ItemMeta meta = item.getItemMeta();
@@ -162,7 +162,8 @@ public class BingoCardListener implements Listener {
 
         BingoTeam team = teams.getUserTeam(player.getUniqueId());
         if (team == null) {
-            Locale.NOT_ON_TEAM.send(player);
+            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
+            ActionBar.send(player, "&c&lYOU ARE NOT ON A TEAM!");
             return;
         }
 

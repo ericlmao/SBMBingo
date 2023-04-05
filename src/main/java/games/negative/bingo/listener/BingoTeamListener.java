@@ -94,7 +94,6 @@ public class BingoTeamListener implements Listener {
         int required = goalManager.getBingoGoals().size();
         int completed = getCompletedGoals(team);
 
-
         BingoColor bingoColor = team.getBingoColor();
         String goalName = TextUtil.stripColor(goal.getDisplay()).toUpperCase();
 
@@ -105,8 +104,7 @@ public class BingoTeamListener implements Listener {
                 .broadcast();
 
         // Check if team has all goals completed, if so then they win
-        if (completed < required)
-            return;
+        if (completed < required) return;
 
         // Team has won
         gameManager.stop(team);
@@ -114,92 +112,72 @@ public class BingoTeamListener implements Listener {
 
     @EventHandler
     public void onPickup(EntityPickupItemEvent event) {
-        if (!(event.getEntity() instanceof Player player))
-            return;
+        if (!(event.getEntity() instanceof Player player)) return;
 
         BingoTeam team = manager.getUserTeam(player.getUniqueId());
-        if (team == null)
-            return;
+        if (team == null) return;
 
         BingoGame game = gameManager.getActiveGame();
-        if (game == null)
-            return;
+        if (game == null) return;
 
-        for (BingoGoal goal : goalManager.getBingoGoals()) {
+        for (BingoGoal goal : goalManager.getBingoGoals())
             goal.onPlayerPickup(team, event);
-        }
     }
 
     @EventHandler
     public void onCraft(CraftItemEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player))
-            return;
+        if (!(event.getWhoClicked() instanceof Player player)) return;
 
         BingoTeam team = manager.getUserTeam(player.getUniqueId());
-        if (team == null)
-            return;
+        if (team == null) return;
 
         BingoGame game = gameManager.getActiveGame();
-        if (game == null)
-            return;
+        if (game == null) return;
 
-        for (BingoGoal goal : goalManager.getBingoGoals()) {
+        for (BingoGoal goal : goalManager.getBingoGoals())
             goal.onCraft(team, event);
-        }
     }
 
     @EventHandler
     public void onInventoryClick(CraftItemEvent event) {
-        if (!(event.getWhoClicked() instanceof Player player))
-            return;
+        if (!(event.getWhoClicked() instanceof Player player)) return;
 
         BingoTeam team = manager.getUserTeam(player.getUniqueId());
-        if (team == null)
-            return;
+        if (team == null) return;
 
         BingoGame game = gameManager.getActiveGame();
-        if (game == null)
-            return;
+        if (game == null) return;
 
-        for (BingoGoal goal : goalManager.getBingoGoals()) {
+        for (BingoGoal goal : goalManager.getBingoGoals())
             goal.onInventoryClick(team, event);
-        }
     }
 
     @EventHandler
     public void onDeath(EntityDeathEvent event) {
-        if (!(event.getEntity() instanceof Player player))
-            return;
+        if (!(event.getEntity() instanceof Player player)) return;
 
         BingoTeam team = manager.getUserTeam(player.getUniqueId());
-        if (team == null)
-            return;
+        if (team == null) return;
 
         BingoGame game = gameManager.getActiveGame();
-        if (game == null)
-            return;
+        if (game == null) return;
 
-        for (BingoGoal goal : goalManager.getBingoGoals()) {
+        for (BingoGoal goal : goalManager.getBingoGoals())
             goal.onDeath(team, event);
-        }
     }
 
     @EventHandler
     public void onPotionEffect(EntityPotionEffectEvent event) {
-        if (!(event.getEntity() instanceof Player player))
-            return;
+        if (!(event.getEntity() instanceof Player player)) return;
 
         BingoTeam team = manager.getUserTeam(player.getUniqueId());
-        if (team == null)
-            return;
+        if (team == null) return;
 
         BingoGame game = gameManager.getActiveGame();
-        if (game == null)
-            return;
+        if (game == null) return;
 
-        for (BingoGoal goal : goalManager.getBingoGoals()) {
+        for (BingoGoal goal : goalManager.getBingoGoals())
             goal.onPotionEffect(team, event);
-        }
     }
 
     @EventHandler

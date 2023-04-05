@@ -10,14 +10,19 @@ import games.negative.bingo.api.event.game.BingoGameEndEvent;
 import games.negative.bingo.api.event.game.BingoGameStartEvent;
 import games.negative.bingo.api.model.BingoGame;
 import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.bingo.core.util.ActionBar;
 import games.negative.bingo.core.util.TeamUtil;
 import games.negative.framework.util.TimeUtil;
 import games.negative.framework.util.Utils;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.scoreboard.Team;
 
 import java.util.Collection;
 import java.util.List;
@@ -41,10 +46,11 @@ public class BingoGameListener implements Listener {
     public void onStart(BingoGameStartEvent event) {
         Collection<BingoTeam> teams = teamManager.getTeams();
         Collection<Player> all = TeamUtil.getAllPlayers(teams);
-        for (Player player : all) {
-            player.sendMessage("Game started");
-        }
 
+        for (Player player : all) {
+            ActionBar.send(player, "&a&lGAME STARTED");
+            player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
+        }
     }
 
     @EventHandler
@@ -57,7 +63,7 @@ public class BingoGameListener implements Listener {
         long started = game.getStarted();
         long now = System.currentTimeMillis();
 
-        String formatted = TimeUtil.format((now + started), now);
+        String formatted = TimeUtil.format(now, started);
 
         BingoTeam winner = event.getWinner();
         // This is the winner team, do something with it
@@ -72,9 +78,22 @@ public class BingoGameListener implements Listener {
     private void clearTeams() {
         for (BingoTeam team : teamManager.getTeams()) {
             List<UUID> toRemove = Lists.newArrayList(team.getMembers());
+
+            Team minecraftTeam = team.getMinecraftTeam();
+
             for (UUID uuid : toRemove) {
                 team.removeMember(uuid);
                 teamManager.removeUserTeam(uuid);
+
+                OfflinePlayer offline = Bukkit.getOfflinePlayer(uuid);
+                if (offline instanceof Player online)
+                    online.setGlowing(false);
+
+                String name = offline.getName();
+                if (name == null)
+                    continue;
+
+                minecraftTeam.removeEntry(name);
             }
 
             team.clearProgress();

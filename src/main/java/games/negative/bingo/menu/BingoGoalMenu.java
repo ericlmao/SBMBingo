@@ -13,9 +13,9 @@ import java.util.List;
 
 public class BingoGoalMenu extends GUI {
     public BingoGoalMenu(BingoTeam team, BingoGoalManager manager) {
-        super("Bingo Card", 6);
+        super("Bingo Card", 5);
 
-        List<Integer> fillers = List.of(0, 1, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 34, 35, 36, 37, 43, 44, 45, 46, 52, 53);
+        List<Integer> fillers = List.of(0, 1, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 34, 35, 36, 37, 43, 44);
 
         ItemStack filler = ItemBuilder.newItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName(" ").build();
         fillers.forEach(index -> setItem(index, player -> filler));

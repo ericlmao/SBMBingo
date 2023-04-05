@@ -7,6 +7,8 @@ import games.negative.framework.base.itembuilder.ItemBuilder;
 import games.negative.framework.gui.GUI;
 import games.negative.framework.util.Utils;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
@@ -24,16 +26,32 @@ public class BingoGoalMenu extends GUI {
             int progress = team.getProgress(goal);
             int amount = goal.getAmount();
 
+            String percent = Utils.decimalFormat((double) progress / amount * 100);
+
+            boolean completed = progress >= amount;
+
             String displayName = goal.getDisplay();
             Material displayMaterial = goal.getDisplayMaterial();
 
-            ItemStack icon = ItemBuilder.newItemBuilder(displayMaterial).setName(displayName)
+            StringBuilder titleBuilder = new StringBuilder(displayName);
+            if (completed)
+                titleBuilder.append(" &7- &2&lCOMPLETED");
+
+            ItemBuilder builder = ItemBuilder.newItemBuilder(displayMaterial)
+                    .setName(titleBuilder.toString())
                     .setLore(
                             "&8&m------------------------",
-                            "&7Progress: &e" + Utils.decimalFormat(progress) + "&6/&e" + Utils.decimalFormat(amount),
+                            "&7Progress (&6" + percent + "%&7): &e" + Utils.decimalFormat(progress) + "&6/&e" + Utils.decimalFormat(amount),
                             "&8&m------------------------"
-                    ).build();
+                    );
 
+            // Add glowing effect if completed
+            if (completed) {
+                builder.addUnsafeEnchantment(Enchantment.DURABILITY, 10);
+                builder.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+            }
+
+            ItemStack icon = builder.build();
             addItem(player -> icon);
         }
 

@@ -91,16 +91,20 @@ public class BingoTeamListener implements Listener {
         BingoTeam team = event.getTeam();
         BingoGoal goal = event.getGoal();
 
+        int required = goalManager.getBingoGoals().size();
+        int completed = getCompletedGoals(team);
+
+
         BingoColor bingoColor = team.getBingoColor();
         String goalName = TextUtil.stripColor(goal.getDisplay()).toUpperCase();
 
         Locale.BINGO_GOAL_COMPLETED.replace("%team%", bingoColor.getColor() + bingoColor.getRealPeopleWord())
-                        .replace("%goal%", goalName).broadcast();
+                        .replace("%goal%", goalName)
+                .replace("%completed%", Utils.decimalFormat(completed))
+                .replace("%total%", Utils.decimalFormat(required))
+                .broadcast();
 
         // Check if team has all goals completed, if so then they win
-        int required = goalManager.getBingoGoals().size();
-        int completed = getCompletedGoals(team);
-
         if (completed < required)
             return;
 

@@ -4,14 +4,21 @@ import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.framework.base.itembuilder.ItemBuilder;
-import games.negative.framework.gui.DropperGUI;
+import games.negative.framework.gui.GUI;
 import games.negative.framework.util.Utils;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-public class BingoGoalMenu extends DropperGUI {
+import java.util.List;
+
+public class BingoGoalMenu extends GUI {
     public BingoGoalMenu(BingoTeam team, BingoGoalManager manager) {
-        super("Bingo Card");
+        super("Bingo Card", 6);
+
+        List<Integer> fillers = List.of(0, 1, 7, 8, 9, 10, 16, 17, 18, 19, 25, 26, 27, 28, 34, 35, 36, 37, 43, 44, 45, 46, 52, 53);
+
+        ItemStack filler = ItemBuilder.newItemBuilder(Material.BLACK_STAINED_GLASS_PANE).setName(" ").build();
+        fillers.forEach(index -> setItem(index, player -> filler));
 
         for (BingoGoal goal : manager.getBingoGoals()) {
             int progress = team.getProgress(goal);

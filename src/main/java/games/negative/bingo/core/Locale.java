@@ -45,9 +45,9 @@ public enum Locale {
     )),
 
     BINGO_GOAL_COMPLETED("bingo-goal-completed", List.of(
-            "&8&m--------------------------------------",
-            "&eTeam %team% &ehas completed &6%goal%",
-            "&8&m--------------------------------------"
+            "&8&m-----------------------------------------------",
+            "&eTeam %team% &ehas completed &6&l%goal% &8(&a%completed%&7/&2%total%&8)",
+            "&8&m-----------------------------------------------"
     ))
     ;
     private final String id;

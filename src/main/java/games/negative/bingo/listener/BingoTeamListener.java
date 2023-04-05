@@ -8,6 +8,7 @@ import games.negative.bingo.api.event.team.BingoTeamCompleteGoalEvent;
 import games.negative.bingo.api.event.team.BingoTeamGoalProgressEvent;
 import games.negative.bingo.api.event.team.BingoTeamJoinEvent;
 import games.negative.bingo.api.event.team.BingoTeamQuitEvent;
+import games.negative.bingo.api.model.BingoGame;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.bingo.core.util.ActionBar;
@@ -121,6 +122,10 @@ public class BingoTeamListener implements Listener {
         if (team == null)
             return;
 
+        BingoGame game = gameManager.getActiveGame();
+        if (game == null)
+            return;
+
         for (BingoGoal goal : goalManager.getBingoGoals()) {
             goal.onPlayerPickup(team, event);
         }
@@ -133,6 +138,10 @@ public class BingoTeamListener implements Listener {
 
         BingoTeam team = manager.getUserTeam(player.getUniqueId());
         if (team == null)
+            return;
+
+        BingoGame game = gameManager.getActiveGame();
+        if (game == null)
             return;
 
         for (BingoGoal goal : goalManager.getBingoGoals()) {
@@ -149,6 +158,10 @@ public class BingoTeamListener implements Listener {
         if (team == null)
             return;
 
+        BingoGame game = gameManager.getActiveGame();
+        if (game == null)
+            return;
+
         for (BingoGoal goal : goalManager.getBingoGoals()) {
             goal.onInventoryClick(team, event);
         }
@@ -161,6 +174,10 @@ public class BingoTeamListener implements Listener {
 
         BingoTeam team = manager.getUserTeam(player.getUniqueId());
         if (team == null)
+            return;
+
+        BingoGame game = gameManager.getActiveGame();
+        if (game == null)
             return;
 
         for (BingoGoal goal : goalManager.getBingoGoals()) {
@@ -177,6 +194,10 @@ public class BingoTeamListener implements Listener {
         if (team == null)
             return;
 
+        BingoGame game = gameManager.getActiveGame();
+        if (game == null)
+            return;
+
         for (BingoGoal goal : goalManager.getBingoGoals()) {
             goal.onPotionEffect(team, event);
         }
@@ -187,6 +208,10 @@ public class BingoTeamListener implements Listener {
         Player player = event.getPlayer();
         BingoTeam team = manager.getUserTeam(player.getUniqueId());
         if (team == null)
+            return;
+
+        BingoGame game = gameManager.getActiveGame();
+        if (game == null)
             return;
 
         for (BingoGoal goal : goalManager.getBingoGoals()) {

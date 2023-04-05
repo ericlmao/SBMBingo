@@ -51,6 +51,8 @@ public class BingoGameListener implements Listener {
             ActionBar.send(player, "&a&lGAME STARTED");
             player.playSound(player.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1);
         }
+
+        goalManager.shuffleGoals();
     }
 
     @EventHandler

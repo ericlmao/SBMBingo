@@ -42,6 +42,11 @@ public class BingoGoalManagerProvider implements BingoGoalManager {
     }
 
     @Override
+    public void shuffleGoals() {
+        Collections.shuffle(this.goals);
+    }
+
+    @Override
     public void onReload(FileConfiguration config) {
         this.goals.clear();
 
@@ -69,6 +74,6 @@ public class BingoGoalManagerProvider implements BingoGoalManager {
             plugin.getLogger().info("Loaded goal " + TextUtil.stripColor(goal.getDisplay()));
         }
 
-        Collections.shuffle(this.goals);
+        shuffleGoals();
     }
 }

@@ -13,6 +13,8 @@ public interface BingoGoalManager {
 
     void removeBingoGoal(BingoGoal goal);
 
+    void shuffleGoals();
+
     void onReload(FileConfiguration config);
 
 }

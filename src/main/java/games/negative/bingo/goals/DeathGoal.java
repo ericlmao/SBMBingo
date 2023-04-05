@@ -32,8 +32,6 @@ public class DeathGoal extends BingoGoal {
     @Override
     public void onDeath(BingoTeam team, EntityDeathEvent event) {
         Player player = (Player) event.getEntity();
-        if (player.getKiller() == null) return;
-
         if (cause == null) {
             increment(team);
             return;

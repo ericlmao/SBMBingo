@@ -6,6 +6,7 @@ import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
 import games.negative.bingo.core.util.TextUtil;
+import games.negative.bingo.goals.BiomeGoal;
 import games.negative.bingo.goals.CollectItemGoal;
 import games.negative.bingo.goals.KillGoal;
 import games.negative.bingo.goals.PotionEffectGoal;
@@ -60,6 +61,7 @@ public class BingoGoalManagerProvider implements BingoGoalManager {
                 case COLLECT -> goal = new CollectItemGoal(section);
                 case KILL -> goal = new KillGoal(section);
                 case POTION_EFFECT -> goal = new PotionEffectGoal(section);
+                case FIND_BIOME -> goal = new BiomeGoal(section);
 
                 default -> throw new IllegalStateException("Unexpected value: " + type);
             }

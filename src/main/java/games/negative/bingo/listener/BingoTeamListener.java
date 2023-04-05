@@ -4,6 +4,7 @@ import games.negative.bingo.api.BingoGameManager;
 import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.event.BingoConfigReloadEvent;
+import games.negative.bingo.api.event.biome.BiomeChangeEvent;
 import games.negative.bingo.api.event.team.BingoTeamCompleteGoalEvent;
 import games.negative.bingo.api.event.team.BingoTeamGoalProgressEvent;
 import games.negative.bingo.api.event.team.BingoTeamJoinEvent;
@@ -199,6 +200,19 @@ public class BingoTeamListener implements Listener {
         for (BingoGoal goal : goalManager.getBingoGoals()) {
             goal.onPotionEffect(team, event);
         }
+    }
+
+    @EventHandler
+    public void onBiomeChange(BiomeChangeEvent event) {
+        Player player = event.getPlayer();
+        BingoTeam team = manager.getUserTeam(player.getUniqueId());
+        if (team == null) return;
+
+        BingoGame game = gameManager.getActiveGame();
+        if (game == null) return;
+
+        for (BingoGoal goal : goalManager.getBingoGoals())
+            goal.onBiomeChange(team, event);
     }
 
     @EventHandler

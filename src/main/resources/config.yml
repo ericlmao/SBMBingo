@@ -40,3 +40,19 @@ goals:
     goal-type: "COLLECT"
     goal-material: COAL
     goal-amount: 32
+
+  KILL_PIG:
+    name: "&fKill a &dPig"
+    material: PORKCHOP
+
+    goal-type: "KILL"
+    goal-entity: PIG
+    goal-amount: 1
+
+  GET_SPEED:
+    name: "&fGet the &bSpeed &fPotion Effect"
+    material: SUGAR
+
+    goal-type: "POTION_EFFECT"
+    goal-potion-effect: speed
+

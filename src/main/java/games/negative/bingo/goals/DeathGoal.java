@@ -11,6 +11,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class DeathGoal extends BingoGoal {
 
@@ -30,8 +31,8 @@ public class DeathGoal extends BingoGoal {
     }
 
     @Override
-    public void onDeath(BingoTeam team, EntityDeathEvent event) {
-        Player player = (Player) event.getEntity();
+    public void onPlayerDeath(BingoTeam team, PlayerDeathEvent event) {
+        Player player = event.getEntity();
         if (cause == null) {
             increment(team);
             return;

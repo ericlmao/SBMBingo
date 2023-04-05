@@ -25,6 +25,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
@@ -154,7 +155,9 @@ public class BingoTeamListener implements Listener {
 
     @EventHandler
     public void onDeath(EntityDeathEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
+        if (event.getEntity().getKiller() == null) return;
+
+        Player player = event.getEntity().getKiller();
 
         BingoTeam team = manager.getUserTeam(player.getUniqueId());
         if (team == null) return;
@@ -164,6 +167,20 @@ public class BingoTeamListener implements Listener {
 
         for (BingoGoal goal : goalManager.getBingoGoals())
             goal.onDeath(team, event);
+    }
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
+
+        BingoTeam team = manager.getUserTeam(player.getUniqueId());
+        if (team == null) return;
+
+        BingoGame game = gameManager.getActiveGame();
+        if (game == null) return;
+
+        for (BingoGoal goal : goalManager.getBingoGoals())
+            goal.onPlayerDeath(team, event);
     }
 
     @EventHandler

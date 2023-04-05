@@ -17,4 +17,6 @@ public enum BingoGoalType {
     // Die (die)
     DIE,
 
+    // Find Biome (find a biome)
+    FIND_BIOME,
 }

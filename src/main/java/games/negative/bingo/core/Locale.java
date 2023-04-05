@@ -44,6 +44,11 @@ public enum Locale {
             "&8[&6Bingo&8] &cThere is no game running!"
     )),
 
+    BINGO_GOAL_COMPLETED("bingo-goal-completed", List.of(
+            "&8&m--------------------------------------",
+            "&eTeam %team% &ehas completed &6%goal%",
+            "&8&m--------------------------------------"
+    ))
     ;
     private final String id;
     private final List<String> defaultMessage;

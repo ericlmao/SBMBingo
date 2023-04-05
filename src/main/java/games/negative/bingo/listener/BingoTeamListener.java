@@ -10,7 +10,9 @@ import games.negative.bingo.api.event.team.BingoTeamJoinEvent;
 import games.negative.bingo.api.event.team.BingoTeamQuitEvent;
 import games.negative.bingo.api.model.BingoGame;
 import games.negative.bingo.api.model.goal.BingoGoal;
+import games.negative.bingo.api.model.team.BingoColor;
 import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.bingo.core.Locale;
 import games.negative.bingo.core.util.ActionBar;
 import games.negative.bingo.core.util.TextUtil;
 import games.negative.framework.util.Utils;
@@ -88,10 +90,13 @@ public class BingoTeamListener implements Listener {
         BingoTeam team = event.getTeam();
         BingoGoal goal = event.getGoal();
 
-        Utils.broadcast("Team " + team.getBingoColor().getRealPeopleWord() + " has completed &a" + TextUtil.stripColor(goal.getDisplay()));
+        BingoColor bingoColor = team.getBingoColor();
+        String goalName = TextUtil.stripColor(goal.getDisplay()).toUpperCase();
+
+        Locale.BINGO_GOAL_COMPLETED.replace("%team%", bingoColor.getColor() + bingoColor.getRealPeopleWord())
+                        .replace("%goal%", goalName).broadcast();
 
         // Check if team has all goals completed, if so then they win
-
         //todo: see if this can be optimized / improved
         Map<BingoGoal, Integer> progresses = team.getProgresses();
         int completed = 0;

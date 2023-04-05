@@ -24,6 +24,13 @@ bingo-card:
   slot: 9
   locked: true # If true, the item will be locked in the inventory
 
+bingo-team-selector:
+  name: "&aTeam Selector &7(Right Click)"
+  material: NETHER_STAR
+  slot: 1
+  locked: true # If true, the item will be locked in the inventory
+
+
 goals:
   COLLECT_DIAMOND: # ID of the Goal
     name: "&fCollect a &bDiamond" # Display Name of the Goal (in the GUI)

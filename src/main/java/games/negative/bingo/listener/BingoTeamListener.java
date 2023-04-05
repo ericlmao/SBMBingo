@@ -76,7 +76,7 @@ public class BingoTeamListener implements Listener {
         for (Player player : team.getOnlinePlayers()) {
 
             String percent = Utils.decimalFormat((double) progress / max * 100);
-            String text = "&a&l" + name + " &7&l| &e" + progress + " &8/ &e" + max + " &6&l" + percent;
+            String text = "&a&l" + name + " &7&l| &e" + progress + " &8/ &e" + max + " &6&l" + percent + "%";
 
             ActionBar.send(player, text);
         }

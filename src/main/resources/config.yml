@@ -62,3 +62,11 @@ goals:
 
     goal-type: "FIND_BIOME"
     goal-biome: DESERT
+
+  DO_THE_DIE:
+    name: "&fDie &c5 &ftimes"
+    material: BARRIER
+
+    goal-type: "DIE"
+    goal-cause:
+    goal-amount: 5

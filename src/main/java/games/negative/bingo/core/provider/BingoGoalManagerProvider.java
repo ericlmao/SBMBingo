@@ -6,10 +6,7 @@ import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
 import games.negative.bingo.core.util.TextUtil;
-import games.negative.bingo.goals.BiomeGoal;
-import games.negative.bingo.goals.CollectItemGoal;
-import games.negative.bingo.goals.KillGoal;
-import games.negative.bingo.goals.PotionEffectGoal;
+import games.negative.bingo.goals.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -62,6 +59,7 @@ public class BingoGoalManagerProvider implements BingoGoalManager {
                 case KILL -> goal = new KillGoal(section);
                 case POTION_EFFECT -> goal = new PotionEffectGoal(section);
                 case FIND_BIOME -> goal = new BiomeGoal(section);
+                case DIE -> goal = new DeathGoal(section);
 
                 default -> throw new IllegalStateException("Unexpected value: " + type);
             }

@@ -11,4 +11,7 @@ public class TextUtil {
         return builder.toString().trim();
     }
 
+    public static String stripColor(String input) {
+        return input.replaceAll("&[0-9a-fk-or]", "");
+    }
 }

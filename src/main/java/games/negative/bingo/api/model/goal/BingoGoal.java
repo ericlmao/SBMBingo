@@ -1,5 +1,6 @@
 package games.negative.bingo.api.model.goal;
 
+import games.negative.bingo.api.event.biome.BiomeChangeEvent;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.framework.key.Keyd;
 import org.bukkit.Material;
@@ -7,9 +8,9 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class BingoGoal implements Keyd<String> {
@@ -84,5 +85,12 @@ public abstract class BingoGoal implements Keyd<String> {
         // Override to add functionality
     }
 
+    public void onPlayerDeath(BingoTeam team, PlayerDeathEvent event) {
+        // Override to add functionality
+    }
+
+    public void onBiomeChange(BingoTeam team, BiomeChangeEvent event) {
+        // Override to add functionality
+    }
 
 }

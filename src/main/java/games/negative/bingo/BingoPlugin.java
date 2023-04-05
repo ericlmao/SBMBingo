@@ -14,6 +14,7 @@ import games.negative.bingo.core.provider.BingoAPIProvider;
 import games.negative.bingo.listener.BingoCardListener;
 import games.negative.bingo.listener.BingoGameListener;
 import games.negative.bingo.listener.BingoTeamListener;
+import games.negative.bingo.listener.BiomeListener;
 import games.negative.bingo.state.GameState;
 import games.negative.framework.BasePlugin;
 import games.negative.framework.json.JSONConfigManager;
@@ -55,7 +56,9 @@ public class BingoPlugin extends BasePlugin {
         registerListeners(
                 new BingoTeamListener(teamManager, goalManager, gameManager),
                 new BingoCardListener(this, teamManager, goalManager),
-                new BingoGameListener(this, gameManager, teamManager, goalManager)
+                new BingoGameListener(this, gameManager, teamManager, goalManager),
+                new BiomeListener()
+
         );
 
         registerCommands(

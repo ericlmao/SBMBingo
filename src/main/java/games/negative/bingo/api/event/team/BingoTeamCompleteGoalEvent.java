@@ -4,16 +4,10 @@ import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoTeam;
 import org.jetbrains.annotations.NotNull;
 
-public class BingoTeamCompleteGoalEvent extends BingoTeamEvent {
+public class BingoTeamCompleteGoalEvent extends BingoTeamGoalEvent {
 
-    private final BingoGoal goal;
     public BingoTeamCompleteGoalEvent(@NotNull BingoTeam team, @NotNull BingoGoal goal) {
-        super(team);
-        this.goal = goal;
+        super(team, goal);
     }
 
-    @NotNull
-    public BingoGoal getGoal() {
-        return goal;
-    }
 }

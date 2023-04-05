@@ -67,15 +67,12 @@ public class CollectItemGoal extends BingoGoal {
             return;
 
         int amount = item.getAmount();
-        int progress = team.getProgress(this);
-        if (progress >= getAmount())
+        int preProgress = team.getProgress(this);
+        if (preProgress >= getAmount())
             return;
 
-        if ((progress + amount) > getAmount())
+        if ((preProgress + amount) > getAmount())
             amount = getAmount();
-
-        BingoTeamGoalProgressEvent progressEvent = new BingoTeamGoalProgressEvent(team, this, progress, amount);
-        Events.call(progressEvent);
 
         team.addProgress(this, amount);
 
@@ -83,6 +80,10 @@ public class CollectItemGoal extends BingoGoal {
         item.setItemMeta(meta);
 
         int postProgress = team.getProgress(this);
+
+        BingoTeamGoalProgressEvent progressEvent = new BingoTeamGoalProgressEvent(team, this, preProgress, postProgress);
+        Events.call(progressEvent);
+
         if (postProgress < getAmount())
             return;
 

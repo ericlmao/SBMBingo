@@ -11,9 +11,6 @@ public enum BingoGoalType {
     // Get Potion Effect (get potion effect)
     POTION_EFFECT,
 
-    // Get Advancement (get advancement)
-    ADVANCEMENT,
-
     // Die (die)
     DIE,
 

@@ -27,6 +27,7 @@ import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.scoreboard.Team;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
@@ -97,19 +98,8 @@ public class BingoTeamListener implements Listener {
                         .replace("%goal%", goalName).broadcast();
 
         // Check if team has all goals completed, if so then they win
-        //todo: see if this can be optimized / improved
-        Map<BingoGoal, Integer> progresses = team.getProgresses();
-        int completed = 0;
         int required = goalManager.getBingoGoals().size();
-
-        for (Map.Entry<BingoGoal, Integer> entry : progresses.entrySet()) {
-            BingoGoal key = entry.getKey();
-            Integer value = entry.getValue();
-
-            if (value >= key.getAmount()) {
-                completed++;
-            }
-        }
+        int completed = getCompletedGoals(team);
 
         if (completed < required)
             return;
@@ -229,5 +219,20 @@ public class BingoTeamListener implements Listener {
         FileConfiguration config = event.getConfig();
         goalManager.onReload(config);
         manager.onReload(config);
+    }
+
+    public int getCompletedGoals(@NotNull BingoTeam team) {
+        Map<BingoGoal, Integer> progresses = team.getProgresses();
+        int completed = 0;
+
+        for (Map.Entry<BingoGoal, Integer> entry : progresses.entrySet()) {
+            BingoGoal key = entry.getKey();
+            Integer value = entry.getValue();
+
+            if (value >= key.getAmount()) {
+                completed++;
+            }
+        }
+        return completed;
     }
 }

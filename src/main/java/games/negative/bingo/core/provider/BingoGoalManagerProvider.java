@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.goal.BingoGoalType;
+import games.negative.bingo.core.util.TextUtil;
 import games.negative.bingo.goals.CollectItemGoal;
 import games.negative.bingo.goals.KillGoal;
 import org.bukkit.configuration.ConfigurationSection;
@@ -63,7 +64,7 @@ public class BingoGoalManagerProvider implements BingoGoalManager {
 
             this.goals.add(goal);
 
-            plugin.getLogger().info("Loaded goal " + goal.getKey() + "");
+            plugin.getLogger().info("Loaded goal " + TextUtil.stripColor(goal.getDisplay()));
         }
 
         Collections.shuffle(this.goals);

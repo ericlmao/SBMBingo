@@ -6,6 +6,7 @@ import games.negative.bingo.api.BingoGameManager;
 import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.event.BingoConfigReloadEvent;
 import games.negative.bingo.api.event.game.BingoGameEndEvent;
+import games.negative.bingo.api.event.game.BingoGameStartEvent;
 import games.negative.bingo.api.model.BingoGame;
 import games.negative.bingo.menu.BingoTeamMenu;
 import games.negative.framework.base.itembuilder.ItemBuilder;
@@ -78,6 +79,11 @@ public class BingoTeamSelectorListener implements Listener {
     }
 
     @EventHandler
+    public void onGameStart(BingoGameStartEvent event) {
+        Bukkit.getOnlinePlayers().forEach(this::remove);
+    }
+
+    @EventHandler
     public void onDrop(PlayerDropItemEvent event) {
         ItemStack item = event.getItemDrop().getItemStack();
         ItemMeta meta = item.getItemMeta();
@@ -144,17 +150,7 @@ public class BingoTeamSelectorListener implements Listener {
         this.locked = section.getBoolean("locked", true);
     }
 
-    private void give(Player player) {
-
-        ItemStack item = this.item.clone();
-        ItemMeta meta = item.getItemMeta();
-        Preconditions.checkNotNull(meta, "ItemMeta is null");
-
-        PersistentDataContainer container = meta.getPersistentDataContainer();
-        container.set(key, PersistentDataType.BYTE, (byte) 1);
-
-        item.setItemMeta(meta);
-
+    private void remove(Player player) {
         // todo Maybe make this a utility method to avoid boilerplate code
         // Loop through the inventory and check if any of the items are the bingo card
         // If it is then remove the item
@@ -173,6 +169,21 @@ public class BingoTeamSelectorListener implements Listener {
         }
 
         duplicate.forEach(inv::remove);
+
+    }
+    private void give(Player player) {
+
+        ItemStack item = this.item.clone();
+        ItemMeta meta = item.getItemMeta();
+        Preconditions.checkNotNull(meta, "ItemMeta is null");
+
+        PersistentDataContainer container = meta.getPersistentDataContainer();
+        container.set(key, PersistentDataType.BYTE, (byte) 1);
+
+        item.setItemMeta(meta);
+
+        PlayerInventory inv = player.getInventory();
+        remove(player);
 
         inv.setItem((slot - 1), item);
 

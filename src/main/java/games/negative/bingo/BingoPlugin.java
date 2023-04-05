@@ -8,7 +8,6 @@ import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.model.team.BingoTeam;
 import games.negative.bingo.commands.admin.CommandBingoAdmin;
-import games.negative.bingo.commands.main.CommandBingo;
 import games.negative.bingo.core.Locale;
 import games.negative.bingo.core.provider.BingoAPIProvider;
 import games.negative.bingo.listener.*;
@@ -60,7 +59,6 @@ public class BingoPlugin extends BasePlugin {
         );
 
         registerCommands(
-                new CommandBingo(teamManager, goalManager),
                 new CommandBingoAdmin(this, gameManager)
         );
     }

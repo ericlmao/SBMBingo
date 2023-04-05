@@ -84,9 +84,5 @@ public abstract class BingoGoal implements Keyd<String> {
         // Override to add functionality
     }
 
-    public void onAdvancement(BingoTeam team, PlayerAdvancementDoneEvent event) {
-        // Override to add functionality
-    }
-
 
 }

@@ -25,7 +25,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
@@ -199,22 +198,6 @@ public class BingoTeamListener implements Listener {
 
         for (BingoGoal goal : goalManager.getBingoGoals()) {
             goal.onPotionEffect(team, event);
-        }
-    }
-
-    @EventHandler
-    public void onAdvancement(PlayerAdvancementDoneEvent event) {
-        Player player = event.getPlayer();
-        BingoTeam team = manager.getUserTeam(player.getUniqueId());
-        if (team == null)
-            return;
-
-        BingoGame game = gameManager.getActiveGame();
-        if (game == null)
-            return;
-
-        for (BingoGoal goal : goalManager.getBingoGoals()) {
-            goal.onAdvancement(team, event);
         }
     }
 

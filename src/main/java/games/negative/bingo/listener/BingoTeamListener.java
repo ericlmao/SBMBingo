@@ -5,10 +5,12 @@ import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.event.BingoConfigReloadEvent;
 import games.negative.bingo.api.event.team.BingoTeamCompleteGoalEvent;
+import games.negative.bingo.api.event.team.BingoTeamGoalProgressEvent;
 import games.negative.bingo.api.event.team.BingoTeamJoinEvent;
 import games.negative.bingo.api.event.team.BingoTeamQuitEvent;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoTeam;
+import games.negative.bingo.core.util.ActionBar;
 import games.negative.bingo.core.util.TextUtil;
 import games.negative.framework.util.Utils;
 import org.bukkit.ChatColor;
@@ -59,6 +61,25 @@ public class BingoTeamListener implements Listener {
         minecraftTeam.removeEntry(player.getName());
 
         player.setGlowing(false);
+    }
+
+    @EventHandler
+    public void onProgressGoal(BingoTeamGoalProgressEvent event) {
+        BingoTeam team = event.getTeam();
+        BingoGoal goal = event.getGoal();
+
+        int progress = event.getNewProgress();
+        int max = goal.getAmount();
+
+        String name = TextUtil.stripColor(goal.getDisplay()).toUpperCase();
+
+        for (Player player : team.getOnlinePlayers()) {
+
+            String percent = Utils.decimalFormat((double) progress / max * 100);
+            String text = "&a&l" + name + " &7&l| &e" + progress + " &8/ &e" + max + " &6&l" + percent;
+
+            ActionBar.send(player, text);
+        }
     }
 
     @EventHandler

@@ -6,12 +6,13 @@ import games.negative.bingo.api.event.team.BingoTeamJoinEvent;
 import games.negative.bingo.api.event.team.BingoTeamQuitEvent;
 import games.negative.bingo.api.model.team.BingoColor;
 import games.negative.bingo.api.model.team.BingoTeam;
-import games.negative.bingo.core.Locale;
+import games.negative.bingo.core.util.ActionBar;
 import games.negative.framework.base.itembuilder.ItemBuilder;
 import games.negative.framework.event.Events;
 import games.negative.framework.gui.GUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 
@@ -54,8 +55,10 @@ public class BingoTeamMenu extends GUI {
                     userTeam.removeMember(uuid);
                     manager.removeUserTeam(uuid);
 
-                    Locale.USER_LEFT_TEAM.replace("%player%", player.getName())
-                            .replace("%team%", bingoColor.getColor() + bingoColor.getRealPeopleWord()).broadcast();
+                    String text = "&6" + player.getName() + " &ehas left " + bingoColor.getColor() + "&l" + bingoColor.getRealPeopleWord() + "&e!";
+                    ActionBar.broadcast(text);
+
+                    Bukkit.getOnlinePlayers().forEach(online -> online.playSound(online.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1));
 
                     BingoTeamQuitEvent quit = new BingoTeamQuitEvent(team, player);
                     Events.call(quit);
@@ -64,8 +67,10 @@ public class BingoTeamMenu extends GUI {
                     team.addMember(uuid);
                     manager.addUserTeam(uuid, team);
 
-                    Locale.USER_JOINED_TEAM.replace("%player%", player.getName())
-                            .replace("%team%", color.getColor() + color.getRealPeopleWord()).broadcast();
+                    String text = "&6" + player.getName() + " &ehas joined " + color.getColor() + "&l" + color.getRealPeopleWord() + "&e!";
+                    ActionBar.broadcast(text);
+
+                    Bukkit.getOnlinePlayers().forEach(online -> online.playSound(online.getLocation(), Sound.ENTITY_ARROW_HIT_PLAYER, 1, 1));
 
                     BingoTeamJoinEvent join = new BingoTeamJoinEvent(team, player);
                     Events.call(join);

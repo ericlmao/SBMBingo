@@ -57,7 +57,7 @@ public class BingoMasterMenu extends GUI {
                 int max = goal.getAmount();
                 boolean completed = progress >= max;
 
-                String percent = Utils.decimalFormat(progress / max * 100);
+                String percent = Utils.decimalFormat((double) progress / max * 100);
 
                 lore.add("&7 - &e" + TextUtil.stripColor(goal.getDisplay()) + " &7(&e" + progress + "&7/&e" + max + "&7) " + (completed ? "&2&lCOMPLETED" : "&e&l" + percent + "%"));
             }

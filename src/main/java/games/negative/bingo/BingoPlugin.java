@@ -59,7 +59,7 @@ public class BingoPlugin extends BasePlugin {
         );
 
         registerCommands(
-                new CommandBingoAdmin(this, gameManager)
+                new CommandBingoAdmin(this, gameManager, teamManager)
         );
     }
 

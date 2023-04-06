@@ -27,6 +27,7 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
@@ -195,6 +196,18 @@ public class BingoTeamListener implements Listener {
 
         for (BingoGoal goal : goalManager.getBingoGoals())
             goal.onPotionEffect(team, event);
+    }
+
+    @EventHandler
+    public void onChat(AsyncPlayerChatEvent event) {
+        Player player = event.getPlayer();
+        BingoTeam team = manager.getUserTeam(player.getUniqueId());
+        if (team == null) return;
+
+        ChatColor color = team.getBingoColor().getColor();
+
+        String format = event.getFormat().replaceAll(player.getName(), color + player.getName() + ChatColor.RESET);
+        event.setFormat(format);
     }
 
     @EventHandler

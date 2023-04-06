@@ -1,5 +1,6 @@
 package games.negative.bingo.listener;
 
+import com.google.common.collect.Maps;
 import games.negative.bingo.api.BingoGameManager;
 import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
@@ -27,22 +28,24 @@ import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.scoreboard.Team;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
+import java.util.UUID;
 
 public class BingoTeamListener implements Listener {
 
     private final BingoTeamManager manager;
     private final BingoGoalManager goalManager;
     private final BingoGameManager gameManager;
+    private final Map<UUID, String> displayNames;
 
     public BingoTeamListener(BingoTeamManager manager, BingoGoalManager goalManager, BingoGameManager gameManager) {
         this.manager = manager;
         this.goalManager = goalManager;
         this.gameManager = gameManager;
+        this.displayNames = Maps.newHashMap();
     }
 
     @EventHandler
@@ -50,6 +53,11 @@ public class BingoTeamListener implements Listener {
         Player player = event.getPlayer();
         BingoTeam team = event.getTeam();
         ChatColor color = team.getBingoColor().getColor();
+
+        String displayName = player.getDisplayName();
+        displayNames.put(player.getUniqueId(), displayName);
+
+        player.setDisplayName(color + player.getName());
 
         Team minecraftTeam = team.getMinecraftTeam();
         minecraftTeam.addEntry(player.getName());
@@ -61,7 +69,9 @@ public class BingoTeamListener implements Listener {
     public void onTeamQuit(BingoTeamQuitEvent event) {
         Player player = event.getPlayer();
         BingoTeam team = event.getTeam();
-        ChatColor color = team.getBingoColor().getColor();
+
+        String displayName = displayNames.get(player.getUniqueId());
+        player.setDisplayName(displayName);
 
         Team minecraftTeam = team.getMinecraftTeam();
         minecraftTeam.removeEntry(player.getName());
@@ -196,18 +206,6 @@ public class BingoTeamListener implements Listener {
 
         for (BingoGoal goal : goalManager.getBingoGoals())
             goal.onPotionEffect(team, event);
-    }
-
-    @EventHandler
-    public void onChat(AsyncPlayerChatEvent event) {
-        Player player = event.getPlayer();
-        BingoTeam team = manager.getUserTeam(player.getUniqueId());
-        if (team == null) return;
-
-        ChatColor color = team.getBingoColor().getColor();
-
-        String format = event.getFormat().replaceAll(player.getName(), color + player.getName() + ChatColor.RESET);
-        event.setFormat(format);
     }
 
     @EventHandler

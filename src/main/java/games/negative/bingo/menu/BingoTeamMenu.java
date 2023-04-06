@@ -57,9 +57,9 @@ public class BingoTeamMenu extends GUI {
                         team.addMember(uuid);
                         manager.addUserTeam(uuid, team);
 
-                        String text = "&6" + player.getName() + "&ehas left "
-                                + bingoColor.getColor() + bingoColor.getRealPeopleWord() + " &eand joined "
-                                + color.getColor() + color.getRealPeopleWord() + "&e!";
+                        String text = "&6" + player.getName() + " &ehas left "
+                                + bingoColor.getColor() + "&l" + bingoColor.getRealPeopleWord() + " &eand joined "
+                                + color.getColor() + "&l" + color.getRealPeopleWord() + "&e!";
 
                         ActionBar.broadcast(text);
 

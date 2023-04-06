@@ -4,6 +4,18 @@ This is a simple Minecraft Bingo Minigame designed for any amount of players, co
 ## How to download
 Head over to the [releases](https://github.com/ericlmao/SBMBingo/releases) page and download the latest version. You can also download the source code and compile and modify it yourself.
 
+## Commands
+The only commands are the administrative commands.
+
+
+| Command              | Permission    | Description                           |
+|----------------------|---------------|---------------------------------------|
+| `/bingoadmin start`  | `bingo.admin` | Starts the game                       |
+| `/bingoadmin stop`   | `bingo.admin` | Stops the game                        |
+| `/bingoadmin reload` | `bingo.admin` | Reloads the configs                   |
+| `/bingoadmin teams`  | `bingo.admin` | Monitor Teams and their game progress |
+
+
 ## How to configure
 By default, the plugin is plug-and-play but you can also configure the cards and have different goals and objectives.
 

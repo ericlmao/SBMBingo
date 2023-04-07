@@ -6,7 +6,6 @@ import games.negative.bingo.api.BingoGoalManager;
 import games.negative.bingo.api.BingoTeamManager;
 import games.negative.bingo.api.event.BingoConfigReloadEvent;
 import games.negative.bingo.api.model.team.BingoTeam;
-import games.negative.bingo.core.Locale;
 import games.negative.bingo.core.util.ActionBar;
 import games.negative.bingo.menu.BingoGoalMenu;
 import games.negative.framework.base.itembuilder.ItemBuilder;
@@ -35,12 +34,11 @@ import java.util.List;
 public class BingoCardListener implements Listener {
 
     private final NamespacedKey card;
+    private final BingoTeamManager teams;
+    private final BingoGoalManager goals;
     private ItemStack cardItem;
     private int slot;
     private boolean locked;
-
-    private final BingoTeamManager teams;
-    private final BingoGoalManager goals;
 
     public BingoCardListener(JavaPlugin plugin, BingoTeamManager teams, BingoGoalManager goals) {
         this.teams = teams;

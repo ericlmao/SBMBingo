@@ -6,7 +6,6 @@ import com.google.common.collect.Maps;
 import games.negative.bingo.api.model.goal.BingoGoal;
 import games.negative.bingo.api.model.team.BingoColor;
 import games.negative.bingo.api.model.team.BingoTeam;
-import games.negative.bingo.core.util.TextUtil;
 import games.negative.framework.util.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

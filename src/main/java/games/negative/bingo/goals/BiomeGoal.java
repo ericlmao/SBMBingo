@@ -13,6 +13,7 @@ import org.bukkit.configuration.ConfigurationSection;
 
 public class BiomeGoal extends BingoGoal {
     private final Biome biome;
+
     public BiomeGoal(ConfigurationSection section) {
         super(section);
         this.biome = Biome.valueOf(section.getString("goal-biome"));

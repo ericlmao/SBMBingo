@@ -35,12 +35,11 @@ import java.util.List;
 public class BingoTeamSelectorListener implements Listener {
 
     private final NamespacedKey key;
+    private final BingoTeamManager manager;
+    private final BingoGameManager gameManager;
     private ItemStack item;
     private int slot;
     private boolean locked;
-
-    private final BingoTeamManager manager;
-    private final BingoGameManager gameManager;
 
     public BingoTeamSelectorListener(JavaPlugin plugin, BingoTeamManager manager, BingoGameManager gameManager) {
         this.manager = manager;
@@ -171,6 +170,7 @@ public class BingoTeamSelectorListener implements Listener {
         duplicate.forEach(inv::remove);
 
     }
+
     private void give(Player player) {
 
         ItemStack item = this.item.clone();

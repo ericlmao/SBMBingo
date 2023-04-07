@@ -150,7 +150,7 @@ public class BingoTeamListener implements Listener {
         String goalName = TextUtil.stripColor(goal.getDisplay()).toUpperCase();
 
         Locale.BINGO_GOAL_COMPLETED.replace("%team%", bingoColor.getColor() + bingoColor.getRealPeopleWord())
-                        .replace("%goal%", goalName)
+                .replace("%goal%", goalName)
                 .replace("%completed%", Utils.decimalFormat(completed))
                 .replace("%total%", Utils.decimalFormat(required))
                 .broadcast();

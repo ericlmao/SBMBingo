@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 public class BingoTeamQuitEvent extends BingoTeamEvent {
 
     private final Player player;
+
     public BingoTeamQuitEvent(@NotNull BingoTeam team, @NotNull Player player) {
         super(team);
         this.player = player;

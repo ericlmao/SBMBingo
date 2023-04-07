@@ -22,6 +22,7 @@ public class CollectItemGoal extends BingoGoal {
 
     private final Material material;
     private final NamespacedKey counted;
+
     public CollectItemGoal(String key, int amount, Material material, String displayName, Material displayMaterial) {
         super(key, BingoGoalType.COLLECT, amount, displayName, displayMaterial);
         this.material = material;

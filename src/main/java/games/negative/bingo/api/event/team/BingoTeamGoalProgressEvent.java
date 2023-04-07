@@ -8,6 +8,7 @@ public class BingoTeamGoalProgressEvent extends BingoTeamGoalEvent {
 
     private final int oldProgress;
     private final int newProgress;
+
     public BingoTeamGoalProgressEvent(@NotNull BingoTeam team, @NotNull BingoGoal goal, int oldProgress, int newProgress) {
         super(team, goal);
         this.oldProgress = oldProgress;

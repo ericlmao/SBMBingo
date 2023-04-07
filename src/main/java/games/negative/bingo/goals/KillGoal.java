@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 public class KillGoal extends BingoGoal {
 
     private final EntityType type;
+
     public KillGoal(ConfigurationSection section) {
         super(section);
         this.type = EntityType.valueOf(section.getString("goal-entity", "ZOMBIE"));

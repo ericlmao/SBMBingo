@@ -22,6 +22,8 @@ public class BingoTeamManagerProvider implements BingoTeamManager {
     private final JavaPlugin plugin;
     private final List<BingoTeam> teams;
     private final Map<UUID, BingoTeam> users;
+    private int teamSize;
+
     public BingoTeamManagerProvider(JavaPlugin plugin, FileConfiguration config) {
         this.plugin = plugin;
         this.teams = Lists.newArrayList();
@@ -61,12 +63,18 @@ public class BingoTeamManagerProvider implements BingoTeamManager {
     }
 
     @Override
+    public int getTeamSize() {
+        return teamSize;
+    }
+
+    @Override
     public void onDisable() {
 
     }
 
     @Override
     public void onReload(FileConfiguration config) {
+        this.teamSize = config.getInt("team-size-limit", 10);
 
         for (BingoTeam team : teams) {
             Team minecraftTeam = team.getMinecraftTeam();

@@ -36,6 +36,7 @@ public class BingoGameEndEvent extends BingoGameEvent {
 
     /**
      * Get the {@link Cause} of the game ending
+     *
      * @return The cause
      */
     @NotNull
@@ -45,6 +46,7 @@ public class BingoGameEndEvent extends BingoGameEvent {
 
     /**
      * Get the winning team, if the game was won
+     *
      * @return The winning team, or null if the game was not won
      * @throws NullPointerException if the game was not won
      */
@@ -55,6 +57,7 @@ public class BingoGameEndEvent extends BingoGameEvent {
 
     /**
      * Get the {@link CommandSender} that cancelled the game, if the game was cancelled
+     *
      * @return The canceler, or null if the game was not cancelled
      * @throws NullPointerException if the game was not cancelled
      */

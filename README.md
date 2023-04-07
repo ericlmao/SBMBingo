@@ -1,12 +1,15 @@
 # SBMBingo
+
 This is a simple Minecraft Bingo Minigame designed for any amount of players, could be one or even one hundred!
 
 ## How to download
-Head over to the [releases](https://github.com/ericlmao/SBMBingo/releases) page and download the latest version. You can also download the source code and compile and modify it yourself.
+
+Head over to the [releases](https://github.com/ericlmao/SBMBingo/releases) page and download the latest version. You can
+also download the source code and compile and modify it yourself.
 
 ## Commands
-The only commands are the administrative commands.
 
+The only commands are the administrative commands.
 
 | Command              | Permission    | Description                           |
 |----------------------|---------------|---------------------------------------|
@@ -15,14 +18,17 @@ The only commands are the administrative commands.
 | `/bingoadmin reload` | `bingo.admin` | Reloads the configs                   |
 | `/bingoadmin teams`  | `bingo.admin` | Monitor Teams and their game progress |
 
-
 ## How to configure
+
 By default, the plugin is plug-and-play but you can also configure the cards and have different goals and objectives.
 
 The configuration is divided into sub-sections that will be explained below.
 
 ### Teams
-The teams section is a list of all available teams and their status, if you don't want `GREEN` team to be available to join, just make the value `false`
+
+The teams section is a list of all available teams and their status, if you don't want `GREEN` team to be available to
+join, just make the value `false`
+
 ```yml
 teams:
   RED: true
@@ -44,17 +50,21 @@ teams:
 ```
 
 ### Game Duration
+
 This is the maximum duration of the game, if the game is not finished by this time, it will automatically end.
+
 ```yml
 max-game-duration: "1h" # Maximum duration of the game
 ```
 
 ### Bingo Card (Item)
+
 This is the item that is used to open the Card Menu and see the current progress of the player.
 
 Configuring the `material` of the item will be slightly difficult as Minecraft is inconsistent with their naming.
 
 For material references, see [here](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)
+
 ```yml
 bingo-card:
   name: "&aBingo Card &7(Right Click)"
@@ -64,11 +74,13 @@ bingo-card:
 ```
 
 ### Bingo Team Selector (Item)
+
 This is the item that is used to open the Team Selector Menu and select a team.
 
 Configuring the `material` of the item will be slightly difficult as Minecraft is inconsistent with their naming.
 
 For material references, see [here](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)
+
 ```yml
 bingo-team-selector:
   name: "&aTeam Selector &7(Right Click)"
@@ -78,11 +90,14 @@ bingo-team-selector:
 ```
 
 ### Bingo Goals
-This is the list of all the goals that are available to complete. You do not need to worry about the order of the goals as they are shuffled when the game begins.
+
+This is the list of all the goals that are available to complete. You do not need to worry about the order of the goals
+as they are shuffled when the game begins.
 
 This default configuration has an example of all the types of goals you can have at the moment.
 
 The entire list of `goal-type` types are the following:
+
 * `COLLECT` - Collect a certain amount of a certain material
 * `KILL` - Kill a certain amount of a certain entity
 * `POTION_EFFECT` - Get a certain potion effect
@@ -90,6 +105,7 @@ The entire list of `goal-type` types are the following:
 * `DIE` - Die a certain amount of times
 
 Configuration Example:
+
 ```yml
 goals:
   COLLECT_DIAMOND: # ID of the Goal

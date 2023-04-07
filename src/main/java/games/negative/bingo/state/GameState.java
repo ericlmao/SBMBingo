@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * Class representation of state.json
- *
+ * <p>
  * state.json holds persistent data about the current state of
  * the game and plugin at runtime
  */

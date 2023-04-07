@@ -18,7 +18,8 @@ public class BiomeListener implements Listener {
         if (to == null) return;
 
         // Player has not moved blocks
-        if (from.getBlockX() == to.getBlockX() && from.getBlockY() == to.getBlockY() && from.getBlockZ() == to.getBlockZ()) return;
+        if (from.getBlockX() == to.getBlockX() && from.getBlockY() == to.getBlockY() && from.getBlockZ() == to.getBlockZ())
+            return;
 
         World fromWorld = from.getWorld();
         if (fromWorld == null) return;

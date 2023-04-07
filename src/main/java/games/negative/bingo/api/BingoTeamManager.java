@@ -30,6 +30,8 @@ public interface BingoTeamManager {
         return getUserTeams().get(uuid);
     }
 
+    int getTeamSize();
+
     void onDisable();
 
     void onReload(FileConfiguration config);

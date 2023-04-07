@@ -44,6 +44,11 @@ public abstract class BingoGoal implements Keyd<String> {
         return key;
     }
 
+    @Override
+    public void setKey(@NotNull String s) {
+        throw new UnsupportedOperationException("Cannot set key of BingoGoal");
+    }
+
     public BingoGoalType getType() {
         return type;
     }
@@ -58,11 +63,6 @@ public abstract class BingoGoal implements Keyd<String> {
 
     public String getDisplay() {
         return display;
-    }
-
-    @Override
-    public void setKey(@NotNull String s) {
-        throw new UnsupportedOperationException("Cannot set key of BingoGoal");
     }
 
     public void onPlayerPickup(BingoTeam team, EntityPickupItemEvent event) {

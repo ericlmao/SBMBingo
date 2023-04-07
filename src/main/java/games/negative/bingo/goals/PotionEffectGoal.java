@@ -16,6 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 public class PotionEffectGoal extends BingoGoal {
 
     private final PotionEffectType type;
+
     public PotionEffectGoal(ConfigurationSection section) {
         super(section);
         this.type = PotionEffectType.getByKey(NamespacedKey.minecraft(section.getString("goal-potion-effect", "speed")));

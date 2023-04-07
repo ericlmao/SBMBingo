@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 // todo: Redesign / cleanup
 public class BingoTeamMenu extends GUI {
@@ -83,6 +82,14 @@ public class BingoTeamMenu extends GUI {
                     BingoTeamQuitEvent quit = new BingoTeamQuitEvent(team, player);
                     Events.call(quit);
                 } else {
+                    if (team.getMembers().size() >= manager.getTeamSize()) {
+                        String text = "&c&lTEAM IS FULL!";
+                        ActionBar.send(player, text);
+
+                        player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
+                        return;
+                    }
+
                     // Join Team
                     team.addMember(uuid);
                     manager.addUserTeam(uuid, team);

@@ -1,14 +1,13 @@
 package games.negative.bingo.task;
 
 import games.negative.bingo.api.BingoAPI;
-import games.negative.bingo.api.event.game.BingoGameEndEvent;
 import games.negative.bingo.api.model.BingoGame;
-import games.negative.framework.event.Events;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class BingoGameTask extends BukkitRunnable {
 
     private final BingoGame game;
+
     public BingoGameTask(BingoGame game) {
         this.game = game;
     }

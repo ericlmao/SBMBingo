@@ -17,6 +17,7 @@ teams:
   LIGHT_PURPLE: true
 
 max-game-duration: "1h" # Maximum duration of the game
+team-size-limit: 10 # Maximum amount of players per team
 
 bingo-card:
   name: "&aBingo Card &7(Right Click)"

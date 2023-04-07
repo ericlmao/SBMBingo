@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 @CommandInfo(
         name = "teams",
+        aliases = {"gui"},
         description = "View the teams in the game",
         permission = "bingo.admin",
         playerOnly = true

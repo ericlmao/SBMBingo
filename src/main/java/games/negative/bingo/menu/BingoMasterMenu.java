@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 public class BingoMasterMenu extends GUI {
     public BingoMasterMenu(BingoTeamManager manager) {
-        super("Bingo Master Menu", 5);
+        super("Bingo Master Menu", 6);
 
         List<Integer> fillers = List.of(
                 0, 1, 2, 3, 4, 5, 6, 7, 8,

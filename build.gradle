@@ -29,7 +29,7 @@ dependencies {
     compileOnly("org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT")
 
     // Framework / Backend
-    implementation("games.negative.framework:minecraft-framework:3.3.6")
+    implementation("games.negative.framework:minecraft-framework:3.4.9")
 }
 
 def targetJavaVersion = 17
